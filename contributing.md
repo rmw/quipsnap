@@ -1,6 +1,6 @@
 If you'd like to contribute to this project, please follow the steps below:
 
-- Fork the repo ( https://github.com/cicadas-2014/quipsnap.git ) to your repo
+- Fork the repo (https://github.com/cicadas-2014/quipsnap.git)
 
 - Git clone your forked repo to your local
 
@@ -24,7 +24,7 @@ If you'd like to contribute to this project, please follow the steps below:
 
 - Push your branch to your fork
 
-`$git push origin branch_name`
+`$ git push origin branch_name`
 
 - Go to Github and submit a pull request from your forked repo
 
