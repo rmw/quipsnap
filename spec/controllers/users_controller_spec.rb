@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe UsersController, :type => :controller do
-	describe "#index" do
+	describe "GET #index" do
 		context "when visiting as a guest" do
 			it "expects response to be successful" do
 				get :index
