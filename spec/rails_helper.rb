@@ -55,11 +55,3 @@ RSpec.configure do |config|
 
   config.order = "random"
 end
-
-Capybara.default_host = 'http://example.org'
-
-OmniAuth.config.test_mode = true
-OmniAuth.config.add_mock(:goodreads, {
-  :uid => '12345',
-  :nickname => 'zapnap'
-})
