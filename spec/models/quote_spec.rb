@@ -1,6 +1,7 @@
 require 'rails_helper'
 
-describe Quote do
+RSpec.describe Quote, :type => :model do
+
 	it "has a valid factory" do
 		expect(build(:quote)).to be_valid
 	end
@@ -20,4 +21,5 @@ describe Quote do
 	it "should belong to a user" do
 		expect(build(:quote)).to respond_to :user
 	end
+	
 end
