@@ -5,10 +5,6 @@ module CapybaraHelpers
       raise AjaxStillWorking unless page.evaluate_script('jQuery.active == 0')
     end
   end
-
-  def say_hello
-    p 'hello'
-  end
 end
 
 

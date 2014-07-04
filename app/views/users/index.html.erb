@@ -1,0 +1,19 @@
+Hi!
+
+<% if session[:user_id].nil? %>
+	<a href="/sign_in">Sign in with GoodReads</a>
+<% else %>
+	<div>You're signed in</div>
+	<a href="/sign_out">Sign out</a>
+<% end %>
+
+<% if @not_authorized  %>
+	<div>you didn't let us authorize your account :(</div>
+<% end %>
+
+
+<% @quotes.each do |quote| %>
+Title: <%= quote.title %><br>
+Content: <%= quote.content %><br>
+Author: <%= quote.author %><br>
+<% end %>
