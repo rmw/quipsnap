@@ -8,7 +8,9 @@
 </head>
 <body>
 <nav>
-	<% if true %>
+	<% if logged_in? %>
+    <%= render partial: "users/dashboard" %>
+  <% else %>
 		<%= render partial: "users/login" %>
 	<% end %>
 	
