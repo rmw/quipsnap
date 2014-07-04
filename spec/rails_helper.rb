@@ -19,6 +19,7 @@ Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
+
   config.include FactoryGirl::Syntax::Methods
   config.include CapybaraHelpers
 
@@ -54,3 +55,11 @@ RSpec.configure do |config|
 
   config.order = "random"
 end
+
+Capybara.default_host = 'http://example.org'
+
+OmniAuth.config.test_mode = true
+OmniAuth.config.add_mock(:goodreads, {
+  :uid => '12345',
+  :nickname => 'zapnap'
+})

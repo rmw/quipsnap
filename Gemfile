@@ -55,3 +55,5 @@ group :test do
   gem 'launchy', '~> 2.3.0'
 end
 
+gem 'omniauth'
+
