@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
 
 	# Only allow users to use Ransack to search quotes by user's username
 	def self.ransackable_attributes(auth_obj = nil)
-		["username"]
+		["goodreads_name"]
 	end
 
 end
