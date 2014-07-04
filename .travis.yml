@@ -3,6 +3,8 @@ rvm:
   - 2.0.0
 env:
   - DB=postgresql
+ global:
+   - NOKOGIRI_USE_SYSTEM_LIBRARIES=true
 script:
   - bundle exec rake spec
 before_script:
@@ -12,3 +14,5 @@ before_script:
   - bundle exec rake db:migrate
   - bundle exec rake db:test:prepare
 bundler_args: --binstubs=./bundler_stubs
+before_install:
+  - 'echo ''gem: --no-ri --no-rdoc'' > ~/.gemrc' # skip installing docs for gems
