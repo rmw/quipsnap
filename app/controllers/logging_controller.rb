@@ -35,4 +35,3 @@ class LoggingController < ApplicationController
 	end
 
 end
-

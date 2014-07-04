@@ -40,7 +40,6 @@ gem 'oauth'
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
-gem 'faker'
 
 group :development, :test do
   gem 'rspec-rails'
