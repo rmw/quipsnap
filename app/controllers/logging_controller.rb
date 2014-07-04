@@ -2,13 +2,6 @@ require 'nokogiri'
 
 class LoggingController < ApplicationController
 	
-<<<<<<< HEAD
-	def index
-
-	end
-
-=======
->>>>>>> 34ac4c576a2db05471f8072d4773f137081829da
 	# Signing in with OAuth
 	def sign_in
 		host_and_port = request.host
@@ -27,7 +20,7 @@ class LoggingController < ApplicationController
 	# After a user authorizes access to GoodReads 
 	def auth
 		request_token = OAuth::RequestToken.from_hash(oauth_consumer, :oauth_token => session[:request_token], :oauth_token_secret => session[:request_secret])
-		# begin
+		begin
 			@access_token = request_token.get_access_token
 			session.delete(:request_token)
 			response = @access_token.get('/api/auth_user')
@@ -41,11 +34,11 @@ class LoggingController < ApplicationController
 	    get_quotes(@user)
 	    session[:user_id] = @user.id
 	    redirect_to :home
-	  # rescue
-	  # 	session.delete(:request_token)
-	  # 	@not_authorized = true
-	  # 	redirect_to :home
-	  # end		
+	  rescue
+	  	session.delete(:request_token)
+	  	@not_authorized = true
+	  	redirect_to :home
+	  end		
 	end
 
 end
