@@ -6,8 +6,8 @@ RSpec.describe User, :type => :model do
     expect(build(:user)).to be_valid
   end
 
-  it "is invalid without a username" do
-    expect(build(:user, username: nil)).to have(1).errors_on(:username)
+  it "is invalid without a goodreads_name" do
+    expect(build(:user, goodreads_name: nil)).to have(1).errors_on(:goodreads_name)
   end
 
   it "is invalid without an auth_token" do
@@ -18,17 +18,17 @@ RSpec.describe User, :type => :model do
     expect(build(:user, auth_secret: nil)).to have(1).errors_on(:auth_secret)
   end
 
-  it "is invalid with a duplicate username" do
-    create(:user)
-    expect(build(:user, username: nil)).to have(1).errors_on(:username)
+  it "is invalid with a duplicate goodreads_name" do
+    create(:user, goodreads_name: "abc")
+    expect(build(:user, goodreads_name: "abc")).to have(1).errors_on(:goodreads_name)
   end
 
   it "has many quotes" do
     expect(build(:user)).to respond_to :quotes
   end
   
-  it "only allows username for ransackable attributes (quotes filter)" do
-    expect(User.ransackable_attributes).to eq(["username"])
+  it "only allows goodreads_name for ransackable attributes (quotes filter)" do
+    expect(User.ransackable_attributes).to eq(["goodreads_name"])
   end
 
 end

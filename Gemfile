@@ -29,7 +29,9 @@ gem 'spring',        group: :development
 
 gem 'oauth'
 gem 'ransack', '~> 1.2.3'
-gem 'rails_12factor'
+gem 'rails_12factor', group: :production
+
+gem 'goodreads'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
