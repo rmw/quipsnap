@@ -19,8 +19,8 @@ RSpec.describe User, :type => :model do
   end
 
   it "is invalid with a duplicate username" do
-    create(:user)
-    expect(build(:user, username: nil)).to have(1).errors_on(:username)
+    create(:user, username: "abc")
+    expect(build(:user, username: "abc")).to have(1).errors_on(:username)
   end
 
   it "has many quotes" do
