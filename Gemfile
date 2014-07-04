@@ -40,7 +40,6 @@ gem 'oauth'
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
-gem 'faker'
 
 group :development, :test do
   gem 'rspec-rails'
@@ -57,6 +56,4 @@ group :test do
   gem 'database_cleaner'
   gem 'launchy', '~> 2.3.0'
 end
-
-gem 'omniauth'
 
