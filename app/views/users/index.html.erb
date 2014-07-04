@@ -1,19 +1,14 @@
-Hi!
+<%= render partial: "quotes/search" %>
 
-<% if session[:user_id].nil? %>
-	<a href="/sign_in">Sign in with GoodReads</a>
-<% else %>
-	<div>You're signed in</div>
-	<a href="/sign_out">Sign out</a>
-<% end %>
-
-<% if @not_authorized  %>
-	<div>you didn't let us authorize your account :(</div>
-<% end %>
-
-
-<% @quotes.each do |quote| %>
-Title: <%= quote.title %><br>
-Content: <%= quote.content %><br>
-Author: <%= quote.author %><br>
-<% end %>
+<div class="quotes">
+	<ul>
+		<% @quotes.each do |quote| %>
+		<div class="quote">
+			<div>Content: <%= quote.content %></div>
+			<div>Title: <%= quote.title %></div>
+			<div>Author: <%= quote.author %></div>
+			<div>Created by: <%= quote.user.username %></div>
+		</div>
+		<% end %>
+	</ul>	
+</div>

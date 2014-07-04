@@ -1,0 +1,14 @@
+<!-- This uses the Ransack gem to allow for search -->
+
+<%= search_form_for @search, url: quote_search_path, html: { method: :post } do |f| %>
+  <%= f.label "Book:" %>
+  <%= f.search_field :title_cont %>
+
+  <%= f.label "Author:" %>
+  <%= f.search_field :author_cont %>
+
+  <%= f.label "User:" %>
+  <%= f.search_field :user_username_cont %>
+
+  <%= f.submit "Search" %>
+<% end %>

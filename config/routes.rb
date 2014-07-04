@@ -6,4 +6,6 @@ Rails.application.routes.draw do
   get '/sign_in' => "logging#sign_in"
   get '/sign_out' => "logging#sign_out"
   get '/auth' => "logging#auth" 
+
+  post '/' => "quotes#search", as: "quote_search"
 end

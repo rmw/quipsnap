@@ -1,8 +1,5 @@
 class LoggingController < ApplicationController
 	
-	def index
-	end
-
 	# Signing in with OAuth
 	def sign_in
 		host_and_port = request.host

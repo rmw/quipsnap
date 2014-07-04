@@ -27,4 +27,8 @@ RSpec.describe User, :type => :model do
     expect(build(:user)).to respond_to :quotes
   end
   
+  it "only allows username for ransackable attributes (quotes filter)" do
+    expect(User.ransackable_attributes).to eq(["username"])
+  end
+
 end

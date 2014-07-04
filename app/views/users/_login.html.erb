@@ -1,2 +1,12 @@
-<%= button_tag("Log In") %>
-<%= button_tag("Sign Up") %>
+ <div class="logging">
+	<% if session[:user_id].nil? %>
+		<a href="/sign_in">Sign in with GoodReads</a>
+	<% else %>
+		<div>You're signed in</div>
+		<a href="/sign_out">Sign out</a>
+	<% end %>
+
+	<% if @not_authorized  %>
+		<div>you didn't let us authorize your account :(</div>
+	<% end %>
+</div><br>
