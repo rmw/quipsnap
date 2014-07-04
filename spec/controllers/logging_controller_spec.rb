@@ -9,6 +9,8 @@ RSpec.describe LoggingController, :type => :controller do
       expect(response).to redirect_to home_path
     end
 
+    ### Needs a way to pass request_token.get_access_token 
+    ### without raising an exception
     # it "assigns a user using the authentication tokens" do
     #   request_token = double()
     #   allow(request_token).to receive(:get_access_token) { '123' }
