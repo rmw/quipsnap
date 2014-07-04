@@ -26,10 +26,10 @@ feature 'Search Quotes', :js => true do
 		quote = create(:quote)
 		quote_2 = create(:quote)
 		visit home_path
-		fill_in "q_user_username_cont", with: quote.user.username
+		fill_in "q_user_goodreads_name_cont", with: quote.user.goodreads_name
 		click_button "Search"
-		expect(page).to have_content(quote.user.username)
-		expect(page).to_not have_content(quote_2.user.username)
+		expect(page).to have_content(quote.user.goodreads_name)
+		expect(page).to_not have_content(quote_2.user.goodreads_name)
 	end
 
 end
