@@ -28,6 +28,8 @@ gem 'spring',        group: :development
 
 
 gem 'oauth'
+gem 'ransack', '~> 1.2.3'
+gem 'rails_12factor', group: :production
 
 gem 'goodreads'
 
@@ -59,3 +61,4 @@ group :test do
   gem 'launchy', '~> 2.3.0'
 end
 
+gem 'simplecov', :require => false, :group => :test

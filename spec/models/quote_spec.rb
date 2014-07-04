@@ -21,5 +21,12 @@ RSpec.describe Quote, :type => :model do
 	it "should belong to a user" do
 		expect(build(:quote)).to respond_to :user
 	end
+
+	it "only allows title and author for ransackable attributes (quotes filter)" do
+		expect(Quote.ransackable_attributes).to eq(["title", "author"])
+	end
 	
+	it "only allows user for ransackable associations (quotes filter)" do
+		expect(Quote.ransackable_associations).to eq(["user"])
+	end
 end

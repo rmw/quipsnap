@@ -2,10 +2,13 @@ require 'nokogiri'
 
 class LoggingController < ApplicationController
 	
+<<<<<<< HEAD
 	def index
 
 	end
 
+=======
+>>>>>>> 34ac4c576a2db05471f8072d4773f137081829da
 	# Signing in with OAuth
 	def sign_in
 		host_and_port = request.host
