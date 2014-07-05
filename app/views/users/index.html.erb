@@ -4,9 +4,10 @@
 		<% @quotes.each do |quote| %>
 		<div class="quote">
 			<div>Content: <%= quote.content %></div>
-			<div>Title: <%= quote.book.title %></div>
-			<div>Author: <%= quote.author.name %></div>
+			<% unless quote.book.nil? %><div>Title: <%= quote.book.title %></div><% end %>
+			<% unless quote.book.nil? %><div>Author: <%= quote.author.name %></div><% end %>
 			<div>Created by: <%= quote.user.goodreads_name %></div>
+			<a href="/quotes/<%= quote.id %>">See more</a>
 			<% if logged_in? %>
 				<button data-quote-id='<%= quote.id %>' class="add-comment">Add Comment</button>
 			<% end %>

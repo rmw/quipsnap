@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
   post '/' => "quotes#search", as: "quote_search"
 
-  post '/quotes/:quote_id/comments/create' => "comments#create"
+  get '/quotes/:id' => "quotes#show"
 
   get '/bookclubs' => "bookclubs#index"
   post '/bookclubs/create' => "bookclubs#create"
