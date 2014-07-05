@@ -1,12 +1,18 @@
 var Comment = {
 	formHTML: function(quoteId){
 		return "<form class='comment-form' action='/quotes/" + quoteId + "/comments/create' method='post'> " +
-		  "<div style='display:none'>" +
-		    "<input name='authenticity_token' type='hidden' value='NrOp5bsjoLRuK8IW5+dQEYjKGUJDe7TQoZVvq95Wteg=' />" +
-		  "</div>" +
 		  "<input class='comment-box' name='comment' type='textarea' placeholder='Your comment here' /><br />" +
 		  "<input name='commit' type='submit' value='Submit Comment' />" +
 		"</form>";
+	},
+
+	commentHTML: function(commentId, content, user) {
+		return	"<div data-comment-id='" + commentId + "' class='quote-comment'>" +
+				"<div>" + content + "</div>" +
+				"<div>Posted by: " + user + "</div>" + 
+				"<button class='more-comments'>See replies</button>" + 
+				"<button class='reply-comment'>Reply</button>" +
+			"</div>"
 	},
 
 	// display the add comment form to the user
@@ -20,22 +26,48 @@ var Comment = {
 		var ajaxRequest = $.ajax({
 			url: action,
 			type: "post",
-			data: {comment: comment}
+			data: {comment: comment, authenticity_token: AUTH_TOKEN}
 		});
+		// if ajax request was a quote's direct comment
+		ajaxRequest.always(this.appendResponse.bind(this));
 
-		ajaxRequest.always(this.appendResponse);
+		// if ajax request was a reply to a comment, do something else ...
+	},
+
+	appendResponse: function(response) {
+		console.log(response);
+		// if (response.isSuccess) {
+		// 	$("div.quote-comments").append(this.commentHTML(response.comment_id, response.comment_content, response.user));
+		// 	this.displayMessage("Comment Saved Successfully");
+		// } else {
+		// 	this.displayMessage("Unable to Save Comment");
+		// }
+
 	},
 
 	// let the user briefly know if comment was saved successfully
 	// this needs to be changed later. right now, the success status is prepended to the top of the page
-	appendResponse: function(response) {
+	displayMessage: function(message) {
 		$("form.comment-form").remove();
 		
-		$("body").prepend("<div class='add-comment-response'>" + response.responseText + "</div>");
+		$("body").prepend("<div class='add-comment-response'>" + message + "</div>");
 
 		setTimeout(function() {
 		  $("div.add-comment-response").remove();
 		}, 1000);
+	},
+
+	replyFormHTML: function(commentId){
+		return "<form class='reply-comment-form' action='/quotes/comments/" + commentId + "/create' method='post'> " +
+		  "<input class='reply-comment-box' name='reply' type='textarea' placeholder='Your reply here' /><br />" +
+		  "<input name='commit' type='submit' value='Submit Reply' />" +
+		"</form>";
+	},
+
+	// display the add comment form to the user
+	displayReplyForm: function(selector, commentId) {
+		var html = this.replyFormHTML(commentId);
+		$(selector).append(html);
 	}
 
 }
@@ -44,25 +76,41 @@ $(document).ready(function(){
 	// when user adds a comment
 	$("button.add-comment").on("click", function(e){
 		e.preventDefault();
+		console.log("add comment button clicked");
 		Comment.displayForm($(e.target).parent(), $(e.target).attr("data-quote-id"));
 	});
 
 	// when user submits a comment
-	$(".quotes").on("submit", "form.comment-form", function(e){
+	$("div.quote").on("submit", "form.comment-form", function(e){
 		e.preventDefault();
+		console.log("submit comment button clicked");
 		var comment = $(e.target).children("input.comment-box").val();
 		var action = $(e.target).attr("action");
 		Comment.ajaxRequestToAdd(comment, action);
 	});	
 
-	// from quote show page, user can see reply to a comment
-	$("button.more-comments").on("click", function(e){
-		var parentCommentId = $(e.target).parent().attr("data-comment-id");
-		console.log(parentCommentId);
-	});
 	// from quote show page, user can reply to a comment
-	$("button.reply-comment").on("click", function(e){
+	$("div.quote-comments").on("click", "button.reply-comment", function(e){
+		e.preventDefault();
+		console.log("reply comment button clicked");
+		var parentCommentId = $(e.target).parent().attr("data-comment-id");
+		Comment.displayReplyForm($(e.target).parent(), parentCommentId)
+	});
+
+	// from quote show page, user submits a reply to a comment
+	$("div.quote-comments").on("submit", "form.reply-comment-form", function(e){
+		e.preventDefault();
+		console.log("submit reply button clicked");
+		var reply = $(e.target).children("input.reply-comment-box").val();
+		var action = $(e.target).attr("action");
+		Comment.ajaxRequestToAdd(reply, action);
+	});
+/*
+	// from quote show page, user can see reply to a comment
+	$("div.quote-comments").on("click", "button.more-comments", function(e){
+		e.preventDefault();
+		console.log("see comment replies button clicked");
 		var parentCommentId = $(e.target).parent().attr("data-comment-id");
 		console.log(parentCommentId);
-	});
+	});*/
 })

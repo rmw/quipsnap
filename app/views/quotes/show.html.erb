@@ -1,13 +1,13 @@
 This is a quote show page
-<div class='show-quote'>
+<div class='quote'>
 	<div>Content: <%= @quote.content %></div>
 	<% unless @quote.book.nil? %><div>Book: <%= @quote.book.title %></div><% end %>
 	<% unless @quote.book.nil? %><div>Author: <%= @quote.author.name %></div><% end %>
 	<div>Created by: <%= @quote.user.goodreads_name %></div>
+	<% if logged_in? %>
+		<button data-quote-id='<%= @quote.id %>' class="add-comment">Add Comment</button>
+	<% end %>
 </div>
-<% if logged_in? %>
-	<button data-quote-id='<%= @quote.id %>' class="add-comment">Add Comment</button>
-<% end %>
 
 <div class='quote-comments'>
 	Comments
