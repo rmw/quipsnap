@@ -8,4 +8,9 @@ RSpec.describe Book, :type => :model do
 	it "is invalid without a title" do
 		expect(build(:book, title: nil)).to have(1).errors_on(:title)
 	end
+
+	it "is invalid with a duplicate title" do
+		create(:book, title: "hey there")
+		expect(build(:book, title: "hey there")).to have(1).errors_on(:title)
+	end
 end

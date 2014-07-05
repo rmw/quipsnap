@@ -29,4 +29,13 @@ RSpec.describe Quote, :type => :model do
 	it "only allows user for ransackable associations (quotes filter)" do
 		expect(Quote.ransackable_associations).to eq(["user", "author", "book"])
 	end
+
+	it "is invalid without a link" do
+		expect(build(:quote, goodreads_link: nil)).to have(1).errors_on(:goodreads_link)
+	end
+
+	it "is invalid with a duplicate link" do
+		create(:quote, goodreads_link: "abc")
+		expect(build(:quote, goodreads_link: "abc")).to have(1).errors_on(:goodreads_link)
+	end
 end
