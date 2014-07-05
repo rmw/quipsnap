@@ -30,8 +30,6 @@ class LoggingController < ApplicationController
 			name_xml = doc.at_xpath('//name')
 			goodreads_username = name_xml.children[0].inner_text
 	    @user = User.find_or_create_by(goodreads_name: goodreads_username, goodreads_user_id: goodreads_user_id, auth_token: @access_token.token, auth_secret: @access_token.secret)
-	    p @user
-	    # ApplicationHelper::get_quotes(@user)
 	    session[:user_id] = @user.id
 	    redirect_to :home
 	  rescue

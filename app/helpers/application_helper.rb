@@ -13,7 +13,6 @@ module ApplicationHelper
     user_recent_quotes.each do |quote|
       unless all_quote_content.include? quote.content
         recent_quote = create_new_quote(quote)
-        p recent_quote
         user.quotes << recent_quote
       end
     end
