@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe CommentsController, :type => :controller do
-	describe "#create" do
+	describe "post#create" do
 		let!(:user) { create(:user) }
 
 		it "creates a new comment object" do
