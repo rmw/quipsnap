@@ -8,9 +8,9 @@ RSpec.describe UsersController, :type => :controller do
 				expect(response).to be_success
 			end
 
-			it "assigns @quotes to quotes" do
+			it "assigns quotes in descending chrono order to @quotes" do
 				get :index
-				quotes = Quote.all
+				quotes = Quote.all.order("created_at DESC")
 				expect(assigns(:quotes)).to eq quotes
 			end
 		end

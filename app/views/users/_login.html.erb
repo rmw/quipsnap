@@ -1,10 +1,5 @@
  <div class="logging">
-	<% if session[:user_id].nil? %>
-		<a href="/sign_in">Sign in with GoodReads</a>
-	<% else %>
-		<div>You're signed in</div>
-		<a href="/sign_out">Sign out</a>
-	<% end %>
+	<a href="/sign_in">Sign in with GoodReads</a>
 
 	<% if @not_authorized  %>
 		<div>you didn't let us authorize your account :(</div>
