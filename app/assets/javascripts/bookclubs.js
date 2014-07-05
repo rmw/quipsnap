@@ -34,7 +34,7 @@ var Bookclubs = {
 
     this.bookclubsHtml += "</ul>";
 
-    $('.container').prepend(this.bookclubsHtml);
+    $('.bookclubs-all').prepend(this.bookclubsHtml);
 
   },
 
