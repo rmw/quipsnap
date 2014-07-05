@@ -1,7 +1,7 @@
 require 'faker'
 
 # Create a couple of authors, books
-2.times do
+5.times do
   Author.create(name: Faker::Name.name)
   Book.create(title: Faker::Commerce.product_name)
 end
