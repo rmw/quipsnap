@@ -9,12 +9,20 @@ Rails.application.routes.draw do
 
   post '/' => "quotes#search", as: "quote_search"
 
+
   get '/quotes/:id' => "quotes#show"
 
   post '/quotes/:quote_id/comments/create' => "comments#create", as: "new_comment"
 
+
   get '/bookclubs' => "bookclubs#index"
+
+
+  post '/bookclubs/:bookclub_id/quotes/:quote_id' => 'bookclubs#add_quote'
+
+
   get '/bookclubs/all' => "bookclubs#all"
   post '/bookclubs' => "bookclubs#create"
+
 
 end
