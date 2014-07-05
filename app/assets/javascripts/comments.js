@@ -36,12 +36,17 @@ var Comment = {
 
 	appendResponse: function(response) {
 		console.log(response);
-		// if (response.isSuccess) {
-		// 	$("div.quote-comments").append(this.commentHTML(response.comment_id, response.comment_content, response.user));
-		// 	this.displayMessage("Comment Saved Successfully");
-		// } else {
-		// 	this.displayMessage("Unable to Save Comment");
-		// }
+		if (response.isSuccess) {
+			// if direct comment to a quote..., else is a reply to a comment
+			if (!response.quote_id == null && response.parent_id == null) {
+				$("div.quote-comments").append(this.commentHTML(response.comment_id, response.comment_content, response.user));
+			} else {
+				$("div[data-comment-id="+response.parent_id+"]").append(this.commentHTML(response.comment_id, response.comment_content, response.user));
+			}
+			this.displayMessage("Comment/Reply Saved Successfully");
+		} else {
+			this.displayMessage("Unable to Save Comment/Reply");
+		}
 
 	},
 
@@ -49,6 +54,7 @@ var Comment = {
 	// this needs to be changed later. right now, the success status is prepended to the top of the page
 	displayMessage: function(message) {
 		$("form.comment-form").remove();
+		$("form.reply-comment-form").remove();
 		
 		$("body").prepend("<div class='add-comment-response'>" + message + "</div>");
 
