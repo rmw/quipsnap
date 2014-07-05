@@ -38,4 +38,8 @@ RSpec.describe Quote, :type => :model do
 		create(:quote, goodreads_link: "abc")
 		expect(build(:quote, goodreads_link: "abc")).to have(1).errors_on(:goodreads_link)
 	end
+
+	it "has many comments" do
+		expect(build(:quote)).to respond_to :comments
+	end
 end
