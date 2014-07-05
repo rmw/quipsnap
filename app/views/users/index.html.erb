@@ -2,7 +2,7 @@
 
 <div class="quotes">
 		<% @quotes.each do |quote| %>
-		<div class="quote">
+		<div class="quote" id="<%=quote.id%>">
 			<div>Content: <%= quote.content %></div>
 			<% unless quote.book.nil? %><div>Title: <%= quote.book.title %></div><% end %>
 			<% unless quote.book.nil? %><div>Author: <%= quote.author.name %></div><% end %>
@@ -14,3 +14,5 @@
 		</div>
 		<% end %>
 </div>
+
+<%= render partial: "users/bookclubs" %>
