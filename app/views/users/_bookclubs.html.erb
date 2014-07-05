@@ -1,0 +1,9 @@
+<div class="users-bookclubs">
+	<% if @bookclubs %>
+		<ul>
+		<% @bookclubs.each do |bookclub| %>
+			<li id="<%=bookclub.id%>"><%=bookclub.name%></li>
+		<% end %>
+		</ul>
+	<% end%>
+</div>

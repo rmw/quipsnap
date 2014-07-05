@@ -1,3 +1,6 @@
+
 <div>You're signed in as: <%= current_user.goodreads_name %></div>
 <a href="/sign_out">Sign out</a><br/>
-<button>Bookclubs</button>
+
+<%= button_to "Bookclubs", bookclubs_path, method: :get, class: "nav-bookclubs" %>
+
