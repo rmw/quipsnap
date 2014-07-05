@@ -13,6 +13,6 @@ Rails.application.routes.draw do
   post '/comments/create' => "comments#create"
 
   get '/bookclubs' => "bookclubs#index"
-  post '/bookclubs/create' => "bookclubs#create"
+  post '/bookclubs' => "bookclubs#create"
 
 end
