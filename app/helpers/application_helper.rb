@@ -8,12 +8,14 @@ module ApplicationHelper
 
   def get_quotes(user)
     updates = goodreads_client.user(user.goodreads_user_id).updates
-    user_recent_quotes = updates.select{|quote| quote.action_text == "liked a quote"}
-    all_quote_content = Quote.pluck(:goodreads_link)
-    user_recent_quotes.each do |quote|
-      unless all_quote_content.include? quote.content
-        recent_quote = create_new_quote(quote)
-        user.quotes << recent_quote
+    if updates
+      user_recent_quotes = updates.select{|quote| quote.action_text == "liked a quote"}
+      all_quote_content = Quote.pluck(:goodreads_link)
+      user_recent_quotes.each do |quote|
+        unless all_quote_content.include? quote.content
+          recent_quote = create_new_quote(quote)
+          user.quotes << recent_quote
+        end
       end
     end
   end
