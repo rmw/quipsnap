@@ -26,9 +26,9 @@ module ApplicationHelper
       author_book_array << link.inner_text
     end
     image = page.at_css(".quoteDetails.fullLine img")
-    image_url = image.attributes["src"].value
+    @image_url = image.attributes["src"].value if image
     @author = Author.find_or_create_by(name: author_book_array[0])
-    @book = Book.find_or_create_by(title: author_book_array[1], image_url: image_url)
+    @book = Book.find_or_create_by(title: author_book_array[1], image_url: @image_url) if author_book_array[1]
     recent_quote = Quote.create(content: quote.body, goodreads_link: quote.link, author: @author, book: @book)
   end
 end
