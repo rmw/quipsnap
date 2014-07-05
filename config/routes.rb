@@ -11,6 +11,8 @@ Rails.application.routes.draw do
 
   get '/quotes/:id' => "quotes#show"
 
+  post '/quotes/:quote_id/comments/create' => "comments#create", as: "new_comment"
+
   get '/bookclubs' => "bookclubs#index"
   post '/bookclubs/create' => "bookclubs#create"
 end
