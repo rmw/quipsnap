@@ -15,51 +15,57 @@
 //= require turbolinks
 //= require_tree .
 
-var commentFormHTML = "<form class='comment-form' action='/comments/create' method='post'> " +
-						  "<div style='display:none'>" +
-						    "<input name='authenticity_token' type='hidden' value='NrOp5bsjoLRuK8IW5+dQEYjKGUJDe7TQoZVvq95Wteg=' />" +
-						  "</div>" +
-						  "<input class='comment-box' name='comment' type='textarea' placeholder='Your comment here' /><br />" +
-						  "<input name='commit' type='submit' value='Submit Comment' />" +
-						"</form>"
 
-var displayCommentForm = function(selector) {
-	$(selector).append(commentFormHTML);
-};
+var Comment = {
+	formHTML: "<form class='comment-form' action='/comments/create' method='post'> " +
+				  "<div style='display:none'>" +
+				    "<input name='authenticity_token' type='hidden' value='NrOp5bsjoLRuK8IW5+dQEYjKGUJDe7TQoZVvq95Wteg=' />" +
+				  "</div>" +
+				  "<input class='comment-box' name='comment' type='textarea' placeholder='Your comment here' /><br />" +
+				  "<input name='commit' type='submit' value='Submit Comment' />" +
+				"</form>",
+	
+	// display the add comment form to the user
+	displayForm: function(selector) {
+		$(selector).append(this.formHTML);
+	}, 
 
-var ajaxRequestAddComment = function(comment) {
-	var ajaxRequest = $.ajax({
-		url: "/comments/create",
-		type: "post",
-		data: {comment: comment}
-	});
+	// send an ajax request to save the user's comment
+	ajaxRequestToAdd: function(comment) {
+		var ajaxRequest = $.ajax({
+			url: "/comments/create",
+			type: "post",
+			data: {comment: comment}
+		});
 
-	ajaxRequest.always(appendComment);
-};
+		ajaxRequest.always(this.appendResponse);
+	},
 
-var appendComment = function(response) {
-	console.log(response.responseText);
-	console.log(response);
-	$("form.comment-form").remove();
-	$("body").prepend("<div class='add-comment-response'>" + response.responseText + "</div>");
-	setTimeout(function() {
-	  $("div.add-comment-response").remove();
-	}, 1000);
-};
+	// let the user briefly know if comment was saved successfully
+	// this needs to be changed later. right now, the success status is prepended to the top of the page
+	appendResponse: function(response) {
+		$("form.comment-form").remove();
+		
+		$("body").prepend("<div class='add-comment-response'>" + response.responseText + "</div>");
+
+		setTimeout(function() {
+		  $("div.add-comment-response").remove();
+		}, 1000);
+	}
+
+}
 
 $(document).ready(function(){
-	// adding a comment
+	// when user adds a comment
 	$(".add-comment").on("click", function(e){
 		e.preventDefault();
-		console.log("add comment!");
-		displayCommentForm($(e.target).parent());
+		Comment.displayForm($(e.target).parent());
 	});
 
-	//submitting a comment
+	// when user submits a comment
 	$(".quotes").on("submit", "form.comment-form", function(e){
 		e.preventDefault();
-		console.log("submit comment!");
 		var comment = $(e.target).children("input.comment-box").val();
-		ajaxRequestAddComment(comment);
+		Comment.ajaxRequestToAdd(comment);
 	});	
 })
