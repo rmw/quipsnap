@@ -7,7 +7,7 @@ feature 'Home page', :js => true do
 		visit home_path
 		expect(page).to have_content('Sign in with GoodReads')
 		expect(page).to have_content(quote.content)
-		expect(page).to have_content(quote.author)
-		expect(page).to have_content(quote.title)
+		expect(page).to have_content(quote.author.name)
+		expect(page).to have_content(quote.book.title)
 	end
 end

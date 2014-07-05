@@ -33,6 +33,7 @@
 /log/*.log
 /tmp
 coverage
+/db/schema.rb
  
 # OS generated files #
 ######################

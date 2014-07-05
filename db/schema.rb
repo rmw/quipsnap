@@ -11,10 +11,38 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140704194020) do
+ActiveRecord::Schema.define(version: 20140704203616) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "authors", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "bookclub_quotes", force: true do |t|
+    t.integer  "bookclub_id"
+    t.integer  "quote_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "bookclubs", force: true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "books", force: true do |t|
+    t.string   "title"
+    t.string   "image_url"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "comments", force: true do |t|
     t.text     "content"
@@ -24,14 +52,21 @@ ActiveRecord::Schema.define(version: 20140704194020) do
     t.datetime "updated_at"
   end
 
+  create_table "memberships", force: true do |t|
+    t.integer  "bookclub_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "quotes", force: true do |t|
     t.text     "content"
-    t.string   "author"
-    t.string   "title"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "goodreads_link"
+    t.integer  "book_id"
+    t.integer  "author_id"
   end
 
   create_table "users", force: true do |t|
