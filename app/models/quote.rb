@@ -5,6 +5,9 @@ class Quote < ActiveRecord::Base
 	belongs_to :author
 	belongs_to :book
 
+	has_many	:bookclub_quotes
+	has_many	:bookclubs, through: :bookclub_quotes
+
 	# Only allow users to use Ransack to search quotes by title and author
 	def self.ransackable_attributes(auth_obj = nil)
 		[]

@@ -11,20 +11,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140704203616) do
+ActiveRecord::Schema.define(version: 20140704202207) do
+
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "authors", force: true do |t|
-    t.string   "name"
+
+  create_table "bookclub_quotes", force: true do |t|
+    t.integer  "bookclub_id"
+    t.integer  "quote_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "books", force: true do |t|
-    t.string   "title"
-    t.string   "image_url"
+  create_table "bookclubs", force: true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+
+  create_table "memberships", force: true do |t|
+    t.integer  "bookclub_id"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
