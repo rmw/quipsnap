@@ -8,4 +8,6 @@ Rails.application.routes.draw do
   get '/auth' => "logging#auth" 
 
   post '/' => "quotes#search", as: "quote_search"
+
+  post '/comments/create' => "comments#create"
 end

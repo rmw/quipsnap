@@ -1,14 +1,15 @@
 <%= render partial: "quotes/search" %>
 
 <div class="quotes">
-	<ul>
 		<% @quotes.each do |quote| %>
 		<div class="quote">
 			<div>Content: <%= quote.content %></div>
 			<div>Title: <%= quote.title %></div>
 			<div>Author: <%= quote.author %></div>
 			<div>Created by: <%= quote.user.goodreads_name %></div>
+			<% if logged_in? %>
+				<button class="add-comment">Add Comment</button>
+			<% end %>
 		</div>
 		<% end %>
-	</ul>	
 </div>
