@@ -14,5 +14,7 @@ Rails.application.routes.draw do
   post '/quotes/:quote_id/comments/create' => "comments#create", as: "new_comment"
 
   get '/bookclubs' => "bookclubs#index"
-  post '/bookclubs/create' => "bookclubs#create"
+  get '/bookclubs/all' => "bookclubs#all"
+  post '/bookclubs' => "bookclubs#create"
+
 end
