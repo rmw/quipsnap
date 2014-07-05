@@ -9,12 +9,6 @@ RSpec.describe BookclubsController, :type => :controller do
         session[:user_id] = user.id
       end
 
-      it "assigns all bookclubs to @bookclubs" do 
-        bookclubs = Bookclub.all 
-        get :index
-        expect(assigns(:bookclubs)).to eq bookclubs
-      end
-
       it "expects response to be successful" do
         get :index
         expect(response).to be_success
@@ -39,23 +33,38 @@ RSpec.describe BookclubsController, :type => :controller do
     end
   end
 
+  describe 'GET #all' do
+
+    let(:bookclubs) { Bookclub.all }
+
+    it "assigns all bookclubs to @bookclubs" do 
+      get :all
+      expect(assigns(:bookclubs)).to eq bookclubs
+    end
+
+    it "returns JSON-formatted bookclubs" do
+      get :all
+      expect(response.body).to have_content bookclubs.to_json
+    end
+  end
+
   describe "POST #create" do
 
     context "valid bookclub parameters" do
-      it "creates a new bookclub" do
-        expect{ post :create, bookclub: attributes_for(:bookclub) }.to change(Bookclub, :count).by(1)
+      it "expects response to be successful" do
+        post :create, bookclub: attributes_for(:bookclub) 
+        expect(response.status).to eq 200
       end
 
-      it "assigns false to @errors" do
-        post :create, bookclub: attributes_for(:bookclub) 
-        expect(assigns(:errors)).to_not be true 
+      it "creates a new bookclub" do
+        expect{ post :create, bookclub: attributes_for(:bookclub) }.to change(Bookclub, :count).by(1)
       end
     end
 
     context "invalid bookclub parameters" do
-      it "assigns true to @errors" do
+      it "returns a 422 status" do
         post :create, bookclub: {name: nil}
-        expect(assigns(:errors)).to_not be true 
+        expect(response.status).to eq 422
       end
 
       it "does not create a new bookclub in the database" do
