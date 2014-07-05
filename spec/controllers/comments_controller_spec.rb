@@ -14,13 +14,13 @@ RSpec.describe CommentsController, :type => :controller do
 		it "returns success message when comment is saved" do
 			allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
 			post :create, comment: "this is a comment", quote_id: quote.id
-			expect(assigns(:success_or_fail_message)).to eq "Comment Saved Successfully"
+			expect(assigns(:isSuccess)).to eq true
 		end
 
 		it "returns failure message when comment is not saved" do
 			allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
 			post :create, comment: "", quote_id: quote.id
-			expect(assigns(:success_or_fail_message)).to eq "Unable to Save Comment"
+			expect(assigns(:isSuccess)).to eq false
 		end
 
 	end
