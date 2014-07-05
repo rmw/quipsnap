@@ -73,4 +73,5 @@ $(document).ready(function(){
 		var action = $(e.target).attr("action");
 		Comment.ajaxRequestToAdd(comment, action);
 	});	
+
 })

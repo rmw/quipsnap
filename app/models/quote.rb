@@ -8,6 +8,13 @@ class Quote < ActiveRecord::Base
 	has_many	:bookclub_quotes
 	has_many	:bookclubs, through: :bookclub_quotes
 
+	# Returns an array of nested hashes, where each hash represents a comment object
+	def comment_chain
+		self.comments.map do |comment|
+			comment.all_replies
+		end
+	end
+
 	# Only allow users to use Ransack to search quotes by title and author
 	def self.ransackable_attributes(auth_obj = nil)
 		[]
