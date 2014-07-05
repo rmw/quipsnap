@@ -2,10 +2,10 @@
 
 <%= search_form_for @search, url: quote_search_path, html: { method: :post } do |f| %>
   <%= f.label "Book:" %>
-  <%= f.search_field :title_cont %>
+  <%= f.search_field :book_title_cont %>
 
   <%= f.label "Author:" %>
-  <%= f.search_field :author_cont %>
+  <%= f.search_field :author_name_cont %>
 
   <%= f.label "User:" %>
   <%= f.search_field :user_goodreads_name_cont %>

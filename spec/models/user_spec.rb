@@ -2,8 +2,10 @@ require 'rails_helper'
 
 RSpec.describe User, :type => :model do
 
+  let(:user) { build(:user) }
+
   it "has a valid factory" do
-    expect(build(:user)).to be_valid
+    expect(user).to be_valid
   end
 
   it "is invalid without a goodreads_name" do
@@ -24,11 +26,15 @@ RSpec.describe User, :type => :model do
   end
 
   it "has many quotes" do
-    expect(build(:user)).to respond_to :quotes
+    expect(user).to respond_to :quotes
   end
   
   it "only allows goodreads_name for ransackable attributes (quotes filter)" do
     expect(User.ransackable_attributes).to eq(["goodreads_name"])
+  end
+
+  it "has many owned_clubs" do
+    expect(user).to respond_to :owned_clubs
   end
 
 end

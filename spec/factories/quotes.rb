@@ -1,8 +1,9 @@
 FactoryGirl.define do
   factory :quote do
   	content {Faker::Lorem.sentence}
-  	author {Faker::Name.name}
-  	title {Faker::Commerce.product_name}
+  	goodreads_link {Faker::Internet.url}
+  	author
   	user
+  	book
   end
 end
