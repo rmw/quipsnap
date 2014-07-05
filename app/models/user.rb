@@ -3,9 +3,10 @@ class User < ActiveRecord::Base
   validates :auth_token, presence: true
   validates :auth_secret, presence: true
   has_many :quotes
+  has_many :comments
 
   has_many :memberships
-  has_many :bookclubs, through: :bookclubs
+  has_many :bookclubs, through: :memberships
 
   has_many :owned_clubs, class_name: "Bookclub"
 

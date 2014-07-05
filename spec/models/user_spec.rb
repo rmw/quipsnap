@@ -29,6 +29,10 @@ RSpec.describe User, :type => :model do
     expect(user).to respond_to :quotes
   end
   
+  it "has many comments" do
+    expect(build(:user)).to respond_to :comments
+  end
+  
   it "only allows goodreads_name for ransackable attributes (quotes filter)" do
     expect(User.ransackable_attributes).to eq(["goodreads_name"])
   end

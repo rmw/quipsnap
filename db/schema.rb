@@ -44,6 +44,14 @@ ActiveRecord::Schema.define(version: 20140704203616) do
     t.datetime "updated_at"
   end
 
+  create_table "comments", force: true do |t|
+    t.text     "content"
+    t.integer  "user_id"
+    t.integer  "parent_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "memberships", force: true do |t|
     t.integer  "bookclub_id"
     t.integer  "user_id"
