@@ -16,8 +16,13 @@ Rails.application.routes.draw do
 
 
   get '/bookclubs' => "bookclubs#index"
-  post '/bookclubs' => "bookclubs#create"
+
 
   post '/bookclubs/:bookclub_id/quotes/:quote_id' => 'bookclubs#add_quote'
+
+
+  get '/bookclubs/all' => "bookclubs#all"
+  post '/bookclubs' => "bookclubs#create"
+
 
 end
