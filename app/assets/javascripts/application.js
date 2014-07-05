@@ -17,23 +17,27 @@
 
 
 var Comment = {
-	formHTML: "<form class='comment-form' action='/comments/create' method='post'> " +
-				  "<div style='display:none'>" +
-				    "<input name='authenticity_token' type='hidden' value='NrOp5bsjoLRuK8IW5+dQEYjKGUJDe7TQoZVvq95Wteg=' />" +
-				  "</div>" +
-				  "<input class='comment-box' name='comment' type='textarea' placeholder='Your comment here' /><br />" +
-				  "<input name='commit' type='submit' value='Submit Comment' />" +
-				"</form>",
-	
+	formHTML: function(quoteId){
+		return "<form class='comment-form' action='/quotes/" + quoteId + "/comments/create' method='post'> " +
+		  "<div style='display:none'>" +
+		    "<input name='authenticity_token' type='hidden' value='NrOp5bsjoLRuK8IW5+dQEYjKGUJDe7TQoZVvq95Wteg=' />" +
+		  "</div>" +
+		  "<input class='comment-box' name='comment' type='textarea' placeholder='Your comment here' /><br />" +
+		  "<input name='commit' type='submit' value='Submit Comment' />" +
+		"</form>";
+	},
+
 	// display the add comment form to the user
-	displayForm: function(selector) {
-		$(selector).append(this.formHTML);
+	displayForm: function(selector, quoteId) {
+		console.log(quoteId);
+		var html = this.formHTML(quoteId);
+		$(selector).append(html);
 	}, 
 
 	// send an ajax request to save the user's comment
-	ajaxRequestToAdd: function(comment) {
+	ajaxRequestToAdd: function(comment, action) {
 		var ajaxRequest = $.ajax({
-			url: "/comments/create",
+			url: action,
 			type: "post",
 			data: {comment: comment}
 		});
@@ -59,13 +63,14 @@ $(document).ready(function(){
 	// when user adds a comment
 	$(".add-comment").on("click", function(e){
 		e.preventDefault();
-		Comment.displayForm($(e.target).parent());
+		Comment.displayForm($(e.target).parent(), $(e.target).attr("data-quote-id"));
 	});
 
 	// when user submits a comment
 	$(".quotes").on("submit", "form.comment-form", function(e){
 		e.preventDefault();
 		var comment = $(e.target).children("input.comment-box").val();
-		Comment.ajaxRequestToAdd(comment);
+		var action = $(e.target).attr("action");
+		Comment.ajaxRequestToAdd(comment, action);
 	});	
 })

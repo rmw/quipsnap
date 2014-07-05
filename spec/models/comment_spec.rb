@@ -16,4 +16,8 @@ RSpec.describe Comment, :type => :model do
 	it "should belong to a user" do
 		expect(build(:comment)).to respond_to :user
 	end
+
+	it "should belong to quote" do
+		expect(build(:comment)).to respond_to :quote
+	end
 end

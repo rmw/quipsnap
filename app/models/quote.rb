@@ -4,7 +4,7 @@ class Quote < ActiveRecord::Base
 	belongs_to :user
 	belongs_to :author
 	belongs_to :book
-
+	has_many :comments
 	has_many	:bookclub_quotes
 	has_many	:bookclubs, through: :bookclub_quotes
 
