@@ -8,7 +8,7 @@
 			<div>Author: <%= quote.author.name %></div>
 			<div>Created by: <%= quote.user.goodreads_name %></div>
 			<% if logged_in? %>
-				<button class="add-comment">Add Comment</button>
+				<button data-quote-id='<%= quote.id %>' class="add-comment">Add Comment</button>
 			<% end %>
 		</div>
 		<% end %>
