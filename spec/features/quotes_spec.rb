@@ -6,20 +6,20 @@ feature 'Search Quotes', :js => true do
 		quote = create(:quote)
 		quote_2 = create(:quote)
 		visit home_path
-		fill_in "q_title_cont", with: quote.title
+		fill_in "q_book_title_cont", with: quote.book.title
 		click_button "Search"
-		expect(page).to have_content(quote.title)
-		expect(page).to_not have_content(quote_2.title)
+		expect(page).to have_content(quote.book.title)
+		expect(page).to_not have_content(quote_2.book.title)
 	end
 
 	scenario 'search by author' do
 		quote = create(:quote)
 		quote_2 = create(:quote)
 		visit home_path
-		fill_in "q_author_cont", with: quote.author
+		fill_in "q_author_name_cont", with: quote.author.name
 		click_button "Search"
-		expect(page).to have_content(quote.author)
-		expect(page).to_not have_content(quote_2.author)
+		expect(page).to have_content(quote.author.name)
+		expect(page).to_not have_content(quote_2.author.name)
 	end
 
 	scenario 'search by username' do

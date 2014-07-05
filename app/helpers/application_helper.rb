@@ -1,3 +1,5 @@
+require 'open-uri'
+require 'nokogiri'
 module ApplicationHelper
   # need to fill this in. represents a logged in user, so we can make API calls on their behalf
   def goodreads_client
@@ -6,10 +8,28 @@ module ApplicationHelper
 
   def get_quotes(user)
     updates = goodreads_client.user(user.goodreads_user_id).updates
-    filtered_quotes = updates.select{|quote| quote.action_text == "liked a quote"}
-    filtered_quotes.each do |quote|
-      final_quote = Quote.create(content: quote.body, goodreads_link: quote.link, author: "test_author", title: "test_title")
-      user.quotes << final_quote
+    user_recent_quotes = updates.select{|quote| quote.action_text == "liked a quote"}
+    all_quote_content = Quote.pluck(:goodreads_link)
+    user_recent_quotes.each do |quote|
+      unless all_quote_content.include? quote.content
+        recent_quote = create_new_quote(quote)
+        p recent_quote
+        user.quotes << recent_quote
+      end
     end
+  end
+
+  def create_new_quote(quote)
+    page = Nokogiri::HTML(open(quote.link))
+    links = page.css('.quoteText a')
+    author_book_array = []
+    links.each do |link|
+      author_book_array << link.inner_text
+    end
+    image = page.at_css(".quoteDetails.fullLine img")
+    image_url = image.attributes["src"].value
+    @author = Author.find_or_create_by(name: author_book_array[0])
+    @book = Book.find_or_create_by(title: author_book_array[1], image_url: image_url)
+    recent_quote = Quote.create(content: quote.body, goodreads_link: quote.link, author: @author, book: @book)
   end
 end
