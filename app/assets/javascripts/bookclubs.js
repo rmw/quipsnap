@@ -10,7 +10,7 @@ var Bookclubs = {
     $('.bookclubs-all').on('click', 'button.bookclub-join', this.sendJoinBookclubRequest.bind(this));
   },
 
-  init: function(model) {
+  init: function() {
     this.bind();
     this.renderList();
   },
