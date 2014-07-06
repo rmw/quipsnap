@@ -11,8 +11,9 @@ class BookclubsController < ApplicationController
 
   def create
     @bookclub = Bookclub.new(bookclub_params)
+    @bookclub.admin = current_user
     if @bookclub.save
-      @bookclub.admin = current_user
+      @bookclub.users << current_user
       render json: { bookclub: @bookclub }.to_json
     else
       render status: :unprocessable_entity, json: { message: "Can't add bookclub!" }.to_json
@@ -24,6 +25,7 @@ class BookclubsController < ApplicationController
     render json: {isSuccess: true}
   end
 
+
   def show
     @quotes = Bookclub.find(params[:bookclub_id]).quotes
     @authors = @quotes.map { |quote| quote.author }
@@ -31,6 +33,11 @@ class BookclubsController < ApplicationController
     @users = @quotes.map { |quote| quote.user.goodreads_name }
 
     render json: {quotes: @quotes, authors: @authors, title: @title, users: @users}.to_json
+
+  def join
+    bookclub = Bookclub.find(params[:bookclub_id])
+    bookclub.users << current_user
+    render json: { bookclub_id: bookclub.id }.to_json
   end
 
   private

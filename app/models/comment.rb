@@ -11,6 +11,11 @@ class Comment < ActiveRecord::Base
 
 	# recursively call direct_replies until empty to get the entire comment chain for a single quote
 	def all_replies
+		chain = {content: self.content, user: self.user.goodreads_name, replies: []}
+		self.direct_replies.each do |reply|
+			chain[:replies] << reply.all_replies 
+		end
+		return chain
 	end
 
 	# the comment that the given comment is in response to. nil, if the "parent comment" is acutally the quote 

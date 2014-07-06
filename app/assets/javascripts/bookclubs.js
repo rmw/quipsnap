@@ -1,10 +1,13 @@
+// Main script for /bookclubs
 var Bookclubs = {
 
-  bookclubsHtml: "<ul class='bookclubs'>",
+  // Finds the current user's id
+  currentUserId: function() { return parseInt($('div.bookclubs-all').attr('data-current-user')); },
 
   // Bind events to Bookclubs
   bind: function() {
     $('.new_bookclub').on('submit', this.sendNewBookclubRequest.bind(this));
+    $('.bookclubs-all').on('click', 'button.bookclub-join', this.sendJoinBookclubRequest.bind(this));
   },
 
   init: function(model) {
@@ -22,14 +25,15 @@ var Bookclubs = {
     ajaxRequest.done(this.showBookclubListHtml.bind(this));
   },
 
+  // Prepare bookclubs list HTML
+  bookclubsHtml: "<ul class='bookclubs'>",
+
   // Return html for all bookclubs
   showBookclubListHtml: function(data) {
-
     var bookclubs = data.bookclubs;
-
     for(var i = 0; i < bookclubs.length; i++) {
       var bookclub = bookclubs[i];
-      this.bookclubsHtml += this.getBookclubHtml(bookclub);
+      this.bookclubsHtml += this.getBookclubHtml(bookclub, this.currentUserId());
     }
 
     this.bookclubsHtml += "</ul>";
@@ -39,14 +43,33 @@ var Bookclubs = {
   },
 
   // Return html for one bookclub
-  getBookclubHtml: function(bookclub) {
-    return "<li id='" +
+  getBookclubHtml: function(bookclub, currentUserId) {
+    // If current user is not in the bookclub,
+    // add a + so that the user can join the bookclub
+    var joinBookclub = "";
+    if ($.inArray(currentUserId, bookclub.user_ids) == -1) {
+      joinBookclub = "<button class='bookclub-join'>+</button>";
+    }
+
+    // If current user is the admin of the bookclub,
+    // add a bookclub-admin class to the li
+    var adminBookclub = "";
+    if (currentUserId == bookclub.admin_id) {
+      adminBookclub = "class='bookclub-admin'";
+    }
+
+    var html = "<li id='" +
                 bookclub.id.toString() +
-                "'>" +
+                "'" +
+                adminBookclub +
+                ">" +
                 bookclub.name +
                 ": " +
                 bookclub.description +
-                "</li>";
+                joinBookclub +
+                "</li>";  
+
+    return html;
   },
 
   // Request new bookclub creation
@@ -76,6 +99,31 @@ var Bookclubs = {
   // Retrieve formFields for reset after submitting
   formFields: function() {
     return $('form.new_bookclub')[0];
+  },
+
+  // Request user to join bookclub
+  sendJoinBookclubRequest: function(e) {
+    e.preventDefault();
+
+    // set id of bookclub to join
+    var bookclubId = $(e.target).parent().attr('id');
+
+    // remove + button after clicking join
+    $(e.target).remove();
+
+    var ajaxRequest = $.ajax({
+      url: '/bookclubs/join',
+      type: 'PUT',
+      data: { bookclub_id: bookclubId }
+    });
+    ajaxRequest.done(this.showJoinBookclub.bind(this));
+  },
+
+  // run this function when we decide how to visualize 
+  // that a user has joined a bookclub. 
+  showJoinBookclub: function(data) {
+    // data.bookclub_id can be used to access the li of the bookclub
+    // by id. may be useful later for selecting the li for styling.
   }
 
 };

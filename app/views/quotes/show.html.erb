@@ -1,14 +1,15 @@
 This is a quote show page
-<div class='show-quote'>
-	<%= @quote.content %>
-	<% unless @quote.book.nil? %><%= @quote.book.title %><% end %>
-	<% unless @quote.book.nil? %><%= @quote.author.name %><% end %>
-	<%= @quote.user.goodreads_name %>
-</div>
-<div class='add-comment'>
-	Add Comment
+<div class='quote'>
+	<div>Content: <%= @quote.content %></div>
+	<% unless @quote.book.nil? %><div>Book: <%= @quote.book.title %></div><% end %>
+	<% unless @quote.book.nil? %><div>Author: <%= @quote.author.name %></div><% end %>
+	<div>Created by: <%= @quote.user.goodreads_name %></div>
+	<% if logged_in? %>
+		<button data-quote-id='<%= @quote.id %>' class="add-comment">Add Comment</button>
+	<% end %>
 </div>
 
 <div class='quote-comments'>
 	Comments
+	<%= render partial: "comments/index" %>
 </div>
