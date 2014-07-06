@@ -20,9 +20,7 @@ class CommentsController < ApplicationController
 	end
 
 	def get_replies
-		reply_chain = params[:comment_ids].map do |id|
-			Comment.find(id.to_i).all_replies	
-		end
+		reply_chain = params[:comment_ids].nil? ? [] : params[:comment_ids].map{ |id| Comment.find(id.to_i).all_replies }
 		render json: reply_chain
 	end
 
