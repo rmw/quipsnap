@@ -15,5 +15,10 @@ RSpec.describe BookclubQuote, :type => :model do
   it "belongs to a quote" do
     expect(bookclub_quote).to respond_to :quote
   end
+
+  it "must have unique bookclub_id and quote_id values" do
+    create(:bookclub_quote, bookclub_id: 1, quote_id: 1)
+    expect(build(:bookclub_quote, bookclub_id: 1, quote_id: 1)).to have(1).errors_on(:bookclub_id)
+  end
   
 end

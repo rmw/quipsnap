@@ -83,4 +83,8 @@ var Bookclubs = {
 //On document load
 $(document).ready(function(){
   Bookclubs.init();
+
+
+
+  
 });
