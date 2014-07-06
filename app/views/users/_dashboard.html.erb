@@ -9,7 +9,6 @@
 <div class="dashboard">
 	<% if logged_in? %>
 		<div></div>
-		<!-- <a href="/sign_out">Sign out</a><br/> -->
 		<nav>
 			<%= button_to current_user.goodreads_name, "/", method: :get, class: "nav-user" %>
 			<%= button_to "", "/sign_out", method: :get, class: "nav-signout" %>
@@ -19,7 +18,6 @@
 		</nav>
 	<% else %>
 		<%= button_to "", "/sign_in", method: :get, class: "nav-signin" %>
-		<!-- <a href="/sign_in">Sign in with GoodReads</a> -->
 	<% end %>
 </div>
 
