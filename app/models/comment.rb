@@ -6,7 +6,7 @@ class Comment < ActiveRecord::Base
 
 	# recursively call to get the entire reply chain for a single comment
 	def all_replies
-		chain = { comment_id: self.id, parent_id: self.parent_id, quote_id: self.quote_id, content: self.content, user: self.user.goodreads_name, replies: []}
+		chain = { comment_id: self.id, parent_id: self.parent_id, quote_id: self.quote_id, comment_content: self.content, user: self.user.goodreads_name, replies: []}
 		self.direct_replies.each do |reply|
 			chain[:replies] << reply.all_replies 
 		end

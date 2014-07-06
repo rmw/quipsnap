@@ -1,4 +1,6 @@
 var Comment = {
+	commentChain: [],
+
 	formHTML: function(quoteId){
 		return "<form class='comment-form' action='/quotes/" + quoteId + "/comments/create' method='post'> " +
 		  "<input class='comment-box' name='comment' type='textarea' placeholder='Your comment here' /><br />" +
@@ -72,6 +74,25 @@ var Comment = {
 
 		ajaxRequest.always(this.appendResponse.bind(this));
 
+	},
+
+	showReplies: function(commentId) {
+		// commentChain
+	},
+
+	appendCommentChain: function(){
+		for (var i = 0; i < this.commentChain.length; i++) {
+			for (var j = 0; j < this.commentChain[i].replies.length; j++) {
+				this.recursiveCall(this.commentChain[i].replies[j]);
+			}
+		}
+	},
+
+	recursiveCall: function(comment) {
+		$("div[data-comment-id="+comment.parent_id+"]").append(this.commentHTML(comment.comment_id, comment.comment_content, comment.user));
+		for (var i = 0; i < comment.replies.length; i++) {
+			this.recursiveCall(comment.replies[i]);
+		}
 	}
 
 }
@@ -108,18 +129,25 @@ $(document).ready(function(){
 		Comment.ajaxRequestToAdd(reply, action);
 	});
 
-	// from quote show page, user can see reply to a comment
+	// from quote show page, user can expand replies for a comment
 	$("div.quote-comments").on("click", "button.more-comments", function(e){
 		e.preventDefault();
 		console.log("see comment replies button clicked");
 		var parentCommentId = $(e.target).parent().attr("data-comment-id");
 		console.log(parentCommentId);
+		Comment.showReplies(parentCommentId);
 	});
-	
 
-	var commentChain = []
+	// // from quote show page, user can collapse replies for a comment
+	// $("div.quote-comments").on("click", "button.less-comments", function(e){
+	// 	e.preventDefault();
+	// 	console.log("see less comment replies button clicked");
+	// 	var parentCommentId = $(e.target).parent().attr("data-comment-id");
+	// 	console.log(parentCommentId);
+	// 	Comment.hideReplies(parentCommentId);
+	// });
 
-	// if user on the quote show page, send an ajax request to load all comment replies
+	// if user is on the quote show page, send an ajax request to get all comment replies
 	if ($("div.quote-comments").length > 0) {
 		var commentIds = [];
 		var comments = $("div.quote-comments").children();
@@ -127,7 +155,7 @@ $(document).ready(function(){
 		for (var i = 0 ; i < comments.length; i++) {
 			commentIds.push(comments[i].getAttribute("data-comment-id"))
 		}
-		console.log("sending ajax");
+
 		var ajaxRequest =  $.ajax({
 			url: "/comments/replies",
 			type: "GET",
@@ -135,8 +163,9 @@ $(document).ready(function(){
 		});
 
 		ajaxRequest.always(function(response){
-			commentChain = response;
-			console.log(commentChain);
+			Comment.commentChain = response;
+			console.log(Comment.commentChain);
+			Comment.appendCommentChain();
 		});
 	}
 
