@@ -17,6 +17,15 @@ var Comment = {
 			"</div>"
 	},
 
+	hiddenCommentHTML: function(commentId, content, user) {
+		return	"<div style='display:none' data-comment-id='" + commentId + "' class='quote-comment'>" +
+				"<div>" + content + "</div>" +
+				"<div>Posted by: " + user + "</div>" + 
+				"<button class='more-comments'>See replies</button>" + 
+				"<button class='reply-comment'>Reply</button>" +
+			"</div>"
+	},
+
 	replyFormHTML: function(commentId){
 		return "<form class='reply-comment-form' action='/quotes/comments/" + commentId + "/create' method='post'> " +
 		  "<input class='reply-comment-box' name='reply' type='textarea' placeholder='Your reply here' /><br />" +
@@ -76,10 +85,6 @@ var Comment = {
 
 	},
 
-	showReplies: function(commentId) {
-		// commentChain
-	},
-
 	appendCommentChain: function(){
 		for (var i = 0; i < this.commentChain.length; i++) {
 			for (var j = 0; j < this.commentChain[i].replies.length; j++) {
@@ -89,7 +94,7 @@ var Comment = {
 	},
 
 	recursiveCall: function(comment) {
-		$("div[data-comment-id="+comment.parent_id+"]").append(this.commentHTML(comment.comment_id, comment.comment_content, comment.user));
+		$("div[data-comment-id="+comment.parent_id+"]").append(this.hiddenCommentHTML(comment.comment_id, comment.comment_content, comment.user));
 		for (var i = 0; i < comment.replies.length; i++) {
 			this.recursiveCall(comment.replies[i]);
 		}
@@ -132,20 +137,20 @@ $(document).ready(function(){
 	// from quote show page, user can expand replies for a comment
 	$("div.quote-comments").on("click", "button.more-comments", function(e){
 		e.preventDefault();
-		console.log("see comment replies button clicked");
-		var parentCommentId = $(e.target).parent().attr("data-comment-id");
-		console.log(parentCommentId);
-		Comment.showReplies(parentCommentId);
+		$(e.target).parent().children('div.quote-comment').show();
+		$(e.target).text("Hide replies");
+		$(e.target).removeClass("more-comments");
+		$(e.target).addClass("less-comments");
 	});
 
-	// // from quote show page, user can collapse replies for a comment
-	// $("div.quote-comments").on("click", "button.less-comments", function(e){
-	// 	e.preventDefault();
-	// 	console.log("see less comment replies button clicked");
-	// 	var parentCommentId = $(e.target).parent().attr("data-comment-id");
-	// 	console.log(parentCommentId);
-	// 	Comment.hideReplies(parentCommentId);
-	// });
+	// from quote show page, user can collapse replies for a comment
+	$("div.quote-comments").on("click", "button.less-comments", function(e){
+		e.preventDefault();
+		$(e.target).parent().children('div.quote-comment').hide();
+		$(e.target).text("See replies");
+		$(e.target).removeClass("less-comments");
+		$(e.target).addClass("more-comments");
+	});
 
 	// if user is on the quote show page, send an ajax request to get all comment replies
 	if ($("div.quote-comments").length > 0) {
@@ -164,7 +169,6 @@ $(document).ready(function(){
 
 		ajaxRequest.always(function(response){
 			Comment.commentChain = response;
-			console.log(Comment.commentChain);
 			Comment.appendCommentChain();
 		});
 	}
