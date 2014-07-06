@@ -1,5 +1,6 @@
 <div class="users-bookclubs">
 	<% if @bookclubs %>
+		<p><%= current_user.goodreads_name %>'s Bookclubs</p>
 		<ul>
 		<% @bookclubs.each do |bookclub| %>
 			<li id="<%=bookclub.id%>"><%= button_tag bookclub.name, id: bookclub.id %></li>

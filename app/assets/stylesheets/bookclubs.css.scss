@@ -1,3 +1,34 @@
-// Place all the styles related to the bookclubs controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+@import "style_guide";
+
+.users-bookclubs {
+	width: 20%;
+	float: right;
+	margin-top: 5em;
+
+	p {
+		text-align: center;
+	}
+
+	ul {
+		text-align: center;
+		list-style-type: none;
+		padding: 0;
+
+		li {
+			border: 1px $quote-border solid;
+			border-radius: 2px;
+			margin: 0.5em 0.5em;
+			padding: 1em 0;
+			background-color: $quote-background;
+
+			button {
+				border: none;
+				background-color: white;
+				padding: 0;
+				margin: 0;
+				width: 100%;
+				cursor: pointer;
+			}
+		}
+	}
+}
