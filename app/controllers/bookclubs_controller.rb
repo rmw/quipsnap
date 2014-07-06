@@ -21,8 +21,15 @@ class BookclubsController < ApplicationController
   end
 
   def add_quote
-    Bookclub.find(params[:bookclub_id]).quotes << Quote.find(params[:quote_id])
-    render json: {isSuccess: true}
+    @quote = Quote.find(params[:quote_id])
+    @bookclub = Bookclub.find(params[:bookclub_id])
+    if @bookclub.quotes.include?(@quote)
+      quote_added = false
+    else
+      quote_added = true
+      @bookclub.quotes << @quote
+    end
+    render json: {quote_added: quote_added}
   end
 
 

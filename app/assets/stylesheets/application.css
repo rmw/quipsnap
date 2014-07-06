@@ -13,3 +13,18 @@
  *= require_tree .
  *= require_self
  */
+
+ .ui-droppable {
+ 	background-color: white;
+ }
+ .mouse-hover {
+ 	background-color: blue;
+ }
+
+ .mouse-drop {
+ 	background-color: green;
+ }
+
+ .mouse-drop-false {
+ 	background-color: red;
+ }
