@@ -7,18 +7,31 @@ Rails.application.routes.draw do
 	get '/sign_out' => "logging#sign_out"
 	get '/auth' => "logging#auth" 
 
-  get '/quotes/:id' => "quotes#show"
+	get '/quotes/:id' => "quotes#show", as: "quote"
 	post '/' => "quotes#search", as: "quote_search"
 
-  post '/quotes/:quote_id/comments/create' => "comments#create", as: "new_comment"
+
+	post '/quotes/:quote_id/comments/create' => "comments#create", as: "new_comment"
 	post '/quotes/comments/:comment_id/create' => "comments#create", as: "new_comment_reply"
 	get '/comments/replies' => "comments#get_replies"
 
 	get '/bookclubs' => "bookclubs#index"
-  post '/bookclubs' => "bookclubs#create"
-  get '/bookclubs/all' => "bookclubs#all"
+	post '/bookclubs/create' => "bookclubs#create"
+
 	post '/bookclubs/:bookclub_id/quotes/:quote_id' => 'bookclubs#add_quote'
-  get '/bookclubs/:bookclub_id' => 'bookclubs#show', as: "show_bookclub"
-  put '/bookclubs/join' => "bookclubs#join"
+
+	get '/bookclubs/all' => "bookclubs#all"
+	post '/bookclubs' => "bookclubs#create"
+
+
+	post '/bookclubs/:bookclub_id/quotes/:quote_id' => 'bookclubs#add_quote'
+
+
+	get '/bookclubs/all' => "bookclubs#all"
+	post '/bookclubs' => "bookclubs#create"
+	get '/bookclubs/:bookclub_id' => 'bookclubs#show', as: "show_bookclub"
+
+
+	put '/bookclubs/join' => "bookclubs#join"
 
 end
