@@ -2,7 +2,8 @@ require 'nokogiri'
 
 class LoggingController < ApplicationController
 	
-	# Signing in with OAuth
+	# GET /sign_in
+	# 	signing in with OAuth
 	def sign_in
 		host_and_port = request.host
 		host_and_port << ":3000" if request.host == "localhost"
@@ -12,14 +13,18 @@ class LoggingController < ApplicationController
 		redirect_to request_token.authorize_url
 	end
 
+	# GET /sign_out
 	def sign_out
 		session.clear
 		redirect_to :home
 	end
 
-	# After a user authorizes access to GoodReads 
+	# GET /auth
+	# 	after a user authorizes access to GoodReads 
 	def auth
-		request_token = OAuth::RequestToken.from_hash(oauth_consumer, :oauth_token => session[:request_token], :oauth_token_secret => session[:request_secret])
+		request_token = OAuth::RequestToken.from_hash(oauth_consumer, 
+																									:oauth_token => session[:request_token], 
+																									:oauth_token_secret => session[:request_secret])
 		begin
 			@access_token = request_token.get_access_token
 			session.delete(:request_token)
@@ -29,7 +34,10 @@ class LoggingController < ApplicationController
 			goodreads_user_id = user_xml.attributes["id"].value
 			name_xml = doc.at_xpath('//name')
 			goodreads_username = name_xml.children[0].inner_text
-	    @user = User.find_or_create_by(goodreads_name: goodreads_username, goodreads_user_id: goodreads_user_id, auth_token: @access_token.token, auth_secret: @access_token.secret)
+	    @user = User.find_or_create_by(	goodreads_name: goodreads_username, 
+																    	goodreads_user_id: goodreads_user_id, 
+																    	auth_token: @access_token.token, 
+																    	auth_secret: @access_token.secret)
 	    session[:user_id] = @user.id
 	    redirect_to :home
 	  rescue
