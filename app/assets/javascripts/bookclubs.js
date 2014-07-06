@@ -47,21 +47,23 @@ var Bookclubs = {
     // If current user is not in the bookclub,
     // add a + so that the user can join the bookclub
     var joinBookclub = "";
+    var belongToBookclub = "";
     if ($.inArray(currentUserId, bookclub.user_ids) == -1) {
       joinBookclub = "<button class='bookclub-join'>+</button>";
+    } else {
+      belongToBookclub = "class='bookclub-belong'";
     }
 
     // If current user is the admin of the bookclub,
     // add a bookclub-admin class to the li
-    var adminBookclub = "";
     if (currentUserId == bookclub.admin_id) {
-      adminBookclub = "class='bookclub-admin'";
+      belongToBookclub = belongToBookclub.replace(/'$/, " bookclub-admin'");
     }
 
     var html = "<li id='" +
                 bookclub.id.toString() +
                 "'" +
-                adminBookclub +
+                belongToBookclub + 
                 ">" +
                 bookclub.name +
                 ": " +
@@ -92,7 +94,7 @@ var Bookclubs = {
   },
 
   showNewBookclub: function(data) {
-    $('.bookclubs').append(this.getBookclubHtml(data.bookclub));
+    $('.bookclubs').append(this.getBookclubHtml(data.bookclub, this.currentUserId()));
     this.formFields().reset();
   },
 
@@ -119,20 +121,14 @@ var Bookclubs = {
     ajaxRequest.done(this.showJoinBookclub.bind(this));
   },
 
-  // run this function when we decide how to visualize 
-  // that a user has joined a bookclub. 
+  // data.bookclub_id can be used to access the li of the bookclub by id.
   showJoinBookclub: function(data) {
-    // data.bookclub_id can be used to access the li of the bookclub
-    // by id. may be useful later for selecting the li for styling.
+    $('li#' + data.bookclub_id.toString()).addClass('bookclub-belong');
   }
 
 };
 
 //On document load
 $(document).ready(function(){
-  Bookclubs.init();
-
-
-
-  
+  Bookclubs.init();  
 });
