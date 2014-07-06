@@ -50,6 +50,11 @@ RSpec.describe BookclubsController, :type => :controller do
 
   describe "POST #create" do
 
+    before :each do
+        user = create(:user)
+        session[:user_id] = user.id
+    end
+
     context "valid bookclub parameters" do
       it "expects response to be successful" do
         post :create, bookclub: attributes_for(:bookclub) 
@@ -70,6 +75,33 @@ RSpec.describe BookclubsController, :type => :controller do
       it "does not create a new bookclub in the database" do
         expect{ post :create, bookclub: {name: nil} }.to change(Bookclub, :count).by(0)
       end
+    end
+
+  end
+
+  describe "PUT #join" do
+
+    let(:bookclub) { create(:bookclub) }
+    let(:user) { create(:user) }
+
+    before :each do
+      session[:user_id] = user.id
+    end
+
+    it "expects response to be successful" do
+      put :join, bookclub_id: bookclub.id
+      expect(response.status).to eq 200
+    end
+
+    it "expects the bookclub users to increase by 1" do
+      expect {
+        put :join, bookclub_id: bookclub.id
+      }.to change(bookclub.users, :count).by(1) 
+    end
+
+    it "returns JSON-formatted bookclub id" do
+      put :join, bookclub_id: bookclub.id
+      expect(response.body).to have_content (bookclub.id).to_json
     end
 
   end

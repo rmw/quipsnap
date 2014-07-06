@@ -25,6 +25,12 @@ class BookclubsController < ApplicationController
     render json: {isSuccess: true}
   end
 
+  def join
+    bookclub = Bookclub.find(params[:bookclub_id])
+    bookclub.users << current_user
+    render json: { bookclub_id: bookclub.id }.to_json
+  end
+
   private
 
   def bookclub_params

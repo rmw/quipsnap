@@ -7,6 +7,7 @@ var Bookclubs = {
   // Bind events to Bookclubs
   bind: function() {
     $('.new_bookclub').on('submit', this.sendNewBookclubRequest.bind(this));
+    $('.bookclubs-all').on('click', 'button.bookclub-join', this.sendJoinBookclubRequest.bind(this));
   },
 
   init: function(model) {
@@ -47,7 +48,7 @@ var Bookclubs = {
     // add a + so that the user can join the bookclub
     var joinBookclub = "";
     if ($.inArray(currentUserId, bookclub.user_ids) == -1) {
-      joinBookclub = "<button class='join-bookclub'>+</button>";
+      joinBookclub = "<button class='bookclub-join'>+</button>";
     }
 
     // If current user is the admin of the bookclub,
@@ -98,6 +99,31 @@ var Bookclubs = {
   // Retrieve formFields for reset after submitting
   formFields: function() {
     return $('form.new_bookclub')[0];
+  },
+
+  // Request user to join bookclub
+  sendJoinBookclubRequest: function(e) {
+    e.preventDefault();
+
+    // set id of bookclub to join
+    var bookclubId = $(e.target).parent().attr('id');
+
+    // remove + button after clicking join
+    $(e.target).remove();
+
+    var ajaxRequest = $.ajax({
+      url: '/bookclubs/join',
+      type: 'PUT',
+      data: { bookclub_id: bookclubId }
+    });
+    ajaxRequest.done(this.showJoinBookclub.bind(this));
+  },
+
+  // run this function when we decide how to visualize 
+  // that a user has joined a bookclub. 
+  showJoinBookclub: function(data) {
+    // data.bookclub_id can be used to access the li of the bookclub
+    // by id. may be useful later for selecting the li for styling.
   }
 
 };
