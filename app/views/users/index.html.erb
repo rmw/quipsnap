@@ -3,14 +3,12 @@
 <div class="quotes">
 		<% @quotes.each do |quote| %>
 		<div class="quote" id="<%=quote.id%>">
-			<div>Content: <%= quote.content %></div>
+			<div class="content">"<%= quote.content %>"</div>
+				<%= link_to quote.author.name, quote_search_path(q: {author_name_cont: quote.author.name}), method: :post, class: "search-author" %>
 			<% unless quote.book.nil? %>
-				<%= link_to "Book: " + quote.book.title, quote_search_path(q: {book_title_cont: quote.book.title}), method: :post, class: "search-title" %>
+				<a>,</a> <%= link_to quote.book.title, quote_search_path(q: {book_title_cont: quote.book.title}), method: :post, class: "search-title" %>
 			<% end %>
 
-			<% unless quote.author.nil? %>
-				<%= link_to "Author: " + quote.author.name, quote_search_path(q: {author_name_cont: quote.author.name}), method: :post, class: "search-author" %>
-			<% end %>
 
 			<%= link_to "Created by: " + quote.user.goodreads_name, quote_search_path(q: {user_goodreads_name_cont: quote.user.goodreads_name}), method: :post, class: "search-user" %>
 
@@ -24,5 +22,6 @@
 		</div>
 		<% end %>
 </div>
+
 
 

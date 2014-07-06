@@ -9,7 +9,7 @@ feature 'Show Bookclubs', :js => true do
     allow_any_instance_of(ApplicationController).to receive(:logged_in?).and_return(true)
     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
     visit home_path
-    click_button "Bookclubs"
+    find('.nav-bookclubs').click
     expect(current_path).to eq('/bookclubs')
     expect(page).to have_content(bookclub.name)
     expect(page).to have_content(bookclub.description)
