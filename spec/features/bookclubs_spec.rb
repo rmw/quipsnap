@@ -53,6 +53,7 @@ feature 'Shows Bookclub Quotes', :js => true do
     click_on bookclub.name
     expect(page).to have_content(quote.content)
   end  
+end
 
 
 feature 'Join Bookclubs', :js => true do

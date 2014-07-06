@@ -33,6 +33,7 @@ class BookclubsController < ApplicationController
     @users = @quotes.map { |quote| quote.user.goodreads_name }
 
     render json: {quotes: @quotes, authors: @authors, title: @title, users: @users}.to_json
+  end
 
   def join
     bookclub = Bookclub.find(params[:bookclub_id])
