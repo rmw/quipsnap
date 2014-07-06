@@ -12,7 +12,6 @@ var Comment = {
 		return	"<div data-comment-id='" + commentId + "' class='quote-comment'>" +
 				"<div>" + content + "</div>" +
 				"<div>Posted by: " + user + "</div>" + 
-				"<button class='more-comments'>See replies</button>" + 
 				"<button class='reply-comment'>Reply</button>" +
 			"</div>"
 	},
@@ -21,7 +20,15 @@ var Comment = {
 		return	"<div style='display:none' data-comment-id='" + commentId + "' class='quote-comment'>" +
 				"<div>" + content + "</div>" +
 				"<div>Posted by: " + user + "</div>" + 
+				"<button class='reply-comment'>Reply</button>" +
 				"<button class='more-comments'>See replies</button>" + 
+			"</div>"
+	},
+
+	lastHiddenCommentHTML: function(commentId, content, user) {
+		return	"<div style='display:none' data-comment-id='" + commentId + "' class='quote-comment'>" +
+				"<div>" + content + "</div>" +
+				"<div>Posted by: " + user + "</div>" + 
 				"<button class='reply-comment'>Reply</button>" +
 			"</div>"
 	},
@@ -64,7 +71,12 @@ var Comment = {
 			if (!(response.quote_id == null) && response.parent_id == null) {
 				$("div.quote-comments").append(this.commentHTML(response.comment_id, response.comment_content, response.user));
 			} else {
-				$("div[data-comment-id="+response.parent_id+"]").append(this.commentHTML(response.comment_id, response.comment_content, response.user));
+				// if the parent div does not have a hide/see replies button, add it
+				var parentDiv = $("div[data-comment-id="+response.parent_id+"]") 
+				if (parentDiv.children("button.less-comments").length == 0 && parentDiv.children("button.more-comments").length == 0) {
+					parentDiv.append("<button class='less-comments'>Hide replies</button>");
+				}
+				parentDiv.append(this.commentHTML(response.comment_id, response.comment_content, response.user));
 			}
 			this.displayMessage("Comment/Reply Saved Successfully");
 		} else {
@@ -94,9 +106,13 @@ var Comment = {
 	},
 
 	recursiveCall: function(comment) {
-		$("div[data-comment-id="+comment.parent_id+"]").append(this.hiddenCommentHTML(comment.comment_id, comment.comment_content, comment.user));
-		for (var i = 0; i < comment.replies.length; i++) {
-			this.recursiveCall(comment.replies[i]);
+		if (comment.replies.length == 0) {
+			$("div[data-comment-id="+comment.parent_id+"]").append(this.lastHiddenCommentHTML(comment.comment_id, comment.comment_content, comment.user));
+		} else {
+			$("div[data-comment-id="+comment.parent_id+"]").append(this.hiddenCommentHTML(comment.comment_id, comment.comment_content, comment.user));
+			for (var i = 0; i < comment.replies.length; i++) {
+				this.recursiveCall(comment.replies[i]);
+			}	
 		}
 	}
 
