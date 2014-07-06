@@ -7,14 +7,27 @@ var Quote = {
 			url: '/bookclubs/' + bookclubId + '/quotes/' + quoteId,
 			type: "post"
 		});
+
+
+
+		ajaxRequest.done(function(response){
+			console.log(response);
+			if (response.quote_added == false) {
+				this.mouseDropClass="mouse-drop-false";
+			}
+			else {
+				this.mouseDropClass="mouse-drop";
+			}
+		});
+
+		ajaxRequest.fail(function(response){
+			console.log(response);
+		})
 	},
 
-	almostToBookclub: function(event,ui) {
-		$(this).css("background-color", "blue");
-	},
+	mouseDropClass: "mouse-drop-false",
 
 	offOfBookclub: function(event,ui) {
-		$("li").css("background-color", "white");
 		ui.draggable.mouseup(function(){
 			var top = ui.draggable.data('orgTop');
 			var left = ui.draggable.data('orgLeft');
@@ -49,12 +62,13 @@ $(document).ready(function(){
 
 	//quote can be dropped on bookclub li and will be added to bookclub quotes
 	$("li").droppable({
+		hoverClass: "mouse-hover",
 		drop:function(event,ui) {
 			var quoteId = $(ui.draggable).attr("id");
 			var bookclubId = $(this).attr("id");
 			Quote.addToBookclub(quoteId,bookclubId);
-			$(this).css("background-color", "green");
-			$(this).animate({backgroundColor: 'white'}, 700);
+			$(this).addClass(Quote.mouseDropClass);
+			$(this).removeClass(Quote.mouseDropClass, 600);
 	},
 		over:Quote.almostToBookclub,
 		out:Quote.offOfBookclub
