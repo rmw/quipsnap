@@ -10,7 +10,7 @@
   <%= f.label "User:" %>
   <%= f.search_field :user_goodreads_name_cont %>
 
-  <%= f.submit "Search" %>
+  <%= f.submit "", class: "search" %>
 <% end %>
 
-<%= button_to "Clear Search", home_path, method: :get, class: "clear-search" %>
+<%= button_to "", home_path, method: :get, class: "clear-search" %>
