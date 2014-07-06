@@ -1,5 +1,21 @@
-<div>You're signed in as: <%= current_user.goodreads_name %></div>
-<a href="/sign_out">Sign out</a><br/>
+<!-- On the far left, our logo -->
+<div class="logo">Logo Here</div>
 
-<%= button_to "Bookclubs", bookclubs_path, method: :get, class: "nav-bookclubs" %>
+<!-- On the far right, logging options and nav bar -->
+
+<!-- Log in or Log out -->
+<div class="dashboard">
+	<% if logged_in? %>
+		<div>You're signed in as: <%= current_user.goodreads_name %></div>
+		<a href="/sign_out">Sign out</a><br/>
+		<nav>
+			<%= button_to "Bookclubs", bookclubs_path, method: :get, class: "nav-bookclubs" %>
+			<%= button_to "My notebook", home_path, method: :get, class: "nav-notebook" %>
+			<%= button_to "Recent public quotes", quote_search_path, method: :post, class: "nav-public" %>
+		</nav>
+	<% else %>
+		<a href="/sign_in">Sign in with GoodReads</a>
+	<% end %>
+</div>
+
 

@@ -4,13 +4,23 @@
 		<% @quotes.each do |quote| %>
 		<div class="quote" id="<%=quote.id%>">
 			<div>Content: <%= quote.content %></div>
-			<% unless quote.book.nil? %><div>Title: <%= quote.book.title %></div><% end %>
-			<% unless quote.book.nil? %><div>Author: <%= quote.author.name %></div><% end %>
-			<div>Created by: <%= quote.user.goodreads_name %></div>
-			<a href="/quotes/<%= quote.id %>">See more</a>
-			<% if logged_in? %>
-				<button data-quote-id='<%= quote.id %>' class="add-comment">Add Comment</button>
+			<% unless quote.book.nil? %>
+				<%= link_to "Book: " + quote.book.title, quote_search_path(q: {book_title_cont: quote.book.title}), method: :post, class: "search-title" %>
 			<% end %>
+
+			<% unless quote.author.nil? %>
+				<%= link_to "Author: " + quote.author.name, quote_search_path(q: {author_name_cont: quote.author.name}), method: :post, class: "search-author" %>
+			<% end %>
+
+			<%= link_to "Created by: " + quote.user.goodreads_name, quote_search_path(q: {user_goodreads_name_cont: quote.user.goodreads_name}), method: :post, class: "search-user" %>
+
+			<div class='quote-options'>
+				<button class="share-quote">Share Quote</button>
+				<%= button_to "See more", quote_path(quote), method: :get, class: "show-quote" %>
+				<% if logged_in? %>
+					<button data-quote-id='<%= quote.id %>' class="add-comment">Add Comment</button>
+				<% end %>
+			</div>
 		</div>
 		<% end %>
 </div>
