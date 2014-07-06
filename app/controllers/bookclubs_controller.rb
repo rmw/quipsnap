@@ -3,6 +3,7 @@ class BookclubsController < ApplicationController
   # GET /bookclubs
   def index
     redirect_to home_path if !logged_in?
+    @search = Quote.search(params[:q])
     @bookclub = Bookclub.new
   end
 

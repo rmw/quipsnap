@@ -20,6 +20,39 @@ header {
   top: 0.5em;
 }
 
-.dashboard nav form{
+.dashboard nav form {
+  display: inline-block;
+
+  input {
+    border: none;
+    background-color: transparent;
+    width: 25px;
+    height: 25px;
+
+  }
+}
+
+header form {
   display: inline-block;
 }
+
+.search-bar {
+  width: 70%;
+  margin: 0 auto;
+}
+
+.nav-bookclubs {
+  background-image: url($icon-bookclubs);
+  background-repeat: no-repeat;
+}
+
+.nav-notebook {
+  background-image: url($icon-notebook);
+  background-repeat: no-repeat;
+}
+
+.nav-public {
+  background-image: url($icon-public);
+  background-repeat: no-repeat;
+}
+

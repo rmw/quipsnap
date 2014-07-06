@@ -1,9 +1,14 @@
 //// Set SASS variables here ////
 
 // Colors
-$main-background : rgba(53, 156, 138, 0.7);;
-$header-background : white;
+$main-background : rgba(53, 156, 138, 0.7);
+$header-background : rgba(255, 255, 255, 0.97);
 $header-bottom-border : rgba(53, 156, 138, 1.0);
 $main-font-color : black;
 $quote-border : white;
 $quote-background : white;
+
+// Icons
+$icon-bookclubs : "/icons/glyphicons_351_book_open.png";
+$icon-notebook: "/icons/glyphicons_071_book.png";
+$icon-public: "/icons/glyphicons_351_book_open.png";
