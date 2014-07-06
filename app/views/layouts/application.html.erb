@@ -9,14 +9,9 @@
   <%= javascript_tag "var AUTH_TOKEN = '#{form_authenticity_token}';" if protect_against_forgery? %>
 </head>
 <body>
-<nav>
-	<% if logged_in? %>
+<header>
     <%= render partial: "users/dashboard" %>
-  <% else %>
-		<%= render partial: "users/login" %>
-	<% end %>
-	
-</nav>
+</header>
 
 <div class="container">
   <%= yield %>

@@ -1,12 +1,23 @@
 This is a quote show page
-<div class='quote'>
-	<div>Content: <%= @quote.content %></div>
-	<% unless @quote.book.nil? %><div>Book: <%= @quote.book.title %></div><% end %>
-	<% unless @quote.book.nil? %><div>Author: <%= @quote.author.name %></div><% end %>
-	<div>Created by: <%= @quote.user.goodreads_name %></div>
-	<% if logged_in? %>
-		<button data-quote-id='<%= @quote.id %>' class="add-comment">Add Comment</button>
+
+<div class="quote" id="<%=quote.id%>">
+	<div>Content: <%= quote.content %></div>
+	<% unless quote.book.nil? %>
+		<%= link_to "Book: " + quote.book.title, quote_search_path(q: {book_title_cont: quote.book.title}), method: :post, class: "search-title" %>
 	<% end %>
+
+	<% unless quote.author.nil? %>
+		<%= link_to "Author: " + quote.author.name, quote_search_path(q: {author_name_cont: quote.author.name}), method: :post, class: "search-author" %>
+	<% end %>
+
+	<%= link_to "Created by: " + quote.user.goodreads_name, quote_search_path(q: {user_goodreads_name_cont: quote.user.goodreads_name}), method: :post, class: "search-user" %>
+
+	<div class='quote-options'>
+		<button class="share-quote">Share Quote</button>
+		<% if logged_in? %>
+			<button data-quote-id='<%= quote.id %>' class="add-comment">Add Comment</button>
+		<% end %>
+	</div>
 </div>
 
 <div class='quote-comments'>
