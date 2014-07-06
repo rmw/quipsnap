@@ -1,6 +1,8 @@
+// Main script for /bookclubs
 var Bookclubs = {
 
-  bookclubsHtml: "<ul class='bookclubs'>",
+  // Finds the current user's id
+  currentUserId: function() { return parseInt($('div.bookclubs-all').attr('data-current-user')); },
 
   // Bind events to Bookclubs
   bind: function() {
@@ -22,14 +24,15 @@ var Bookclubs = {
     ajaxRequest.done(this.showBookclubListHtml.bind(this));
   },
 
+  // Prepare bookclubs list HTML
+  bookclubsHtml: "<ul class='bookclubs'>",
+
   // Return html for all bookclubs
   showBookclubListHtml: function(data) {
-
     var bookclubs = data.bookclubs;
-
     for(var i = 0; i < bookclubs.length; i++) {
       var bookclub = bookclubs[i];
-      this.bookclubsHtml += this.getBookclubHtml(bookclub);
+      this.bookclubsHtml += this.getBookclubHtml(bookclub, this.currentUserId());
     }
 
     this.bookclubsHtml += "</ul>";
@@ -39,14 +42,33 @@ var Bookclubs = {
   },
 
   // Return html for one bookclub
-  getBookclubHtml: function(bookclub) {
-    return "<li id='" +
+  getBookclubHtml: function(bookclub, currentUserId) {
+    // If current user is not in the bookclub,
+    // add a + so that the user can join the bookclub
+    var joinBookclub = "";
+    if ($.inArray(currentUserId, bookclub.user_ids) == -1) {
+      joinBookclub = "<button class='join-bookclub'>+</button>";
+    }
+
+    // If current user is the admin of the bookclub,
+    // add a bookclub-admin class to the li
+    var adminBookclub = "";
+    if (currentUserId == bookclub.admin_id) {
+      adminBookclub = "class='bookclub-admin'";
+    }
+
+    var html = "<li id='" +
                 bookclub.id.toString() +
-                "'>" +
+                "'" +
+                adminBookclub +
+                ">" +
                 bookclub.name +
                 ": " +
                 bookclub.description +
-                "</li>";
+                joinBookclub +
+                "</li>";  
+
+    return html;
   },
 
   // Request new bookclub creation

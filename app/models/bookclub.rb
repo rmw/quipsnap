@@ -8,4 +8,14 @@ class Bookclub < ActiveRecord::Base
   has_many  :users, through: :memberships
 
   belongs_to  :admin, class_name: "User", foreign_key: :user_id
+
+  def as_json(options={})
+    {
+      id: id,
+      name: name,
+      admin_id: user_id,
+      description: description,
+      user_ids: users.pluck(:id)
+    }
+  end
 end
