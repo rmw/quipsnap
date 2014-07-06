@@ -38,10 +38,6 @@ var Quote = {
 
 };
 
-
-
-
-
 $(document).ready(function(){
 	//quote is a draggable object that reverts back to original position
 	
@@ -50,6 +46,22 @@ $(document).ready(function(){
 			var dropped = dropped && dropped[0].id == "droppable";
            return !dropped;
 		},
+		start: function(e, ui) { $(this).css('z-index', 1);
+															ui.helper.animate({
+																width: 80,
+																height: 50,
+																marginLeft: (400-80)/2 - (400/2 - e.offsetX),
+																marginTop: (82-50)/2 - (82/2 - e.offsetY)
+															});
+
+														 $(this).find('button, form').hide(); 
+														},
+														 // $(this).css('width', '20%')},
+		stop:  function(e) { $(this).css('z-index', 0); 
+												 $(this).find('button, form').show(); 
+												 $(this).css('width','400px'); 
+												 $(this).css('marginLeft','0');
+												 $(this).css('marginTop','0.5em');},
 		revertDuration: 150
 	}).each(function() {
 		var top = $(this).position().top;
