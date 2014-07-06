@@ -2,7 +2,8 @@ class QuotesController < ApplicationController
 
   # GET /quotes/:id
   def show
-  	@quote = Quote.find_by(id: params[:id])
+  	@search = Quote.search(params[:q])
+    @quote = Quote.find_by(id: params[:id])
   	render "show", locals: {quote: @quote} 
   end
 
