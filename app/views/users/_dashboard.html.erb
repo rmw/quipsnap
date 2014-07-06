@@ -8,15 +8,18 @@
 <!-- On the far right, logging options and nav bar -->
 <div class="dashboard">
 	<% if logged_in? %>
-		<div><%= current_user.goodreads_name %></div>
-		<a href="/sign_out">Sign out</a><br/>
+		<div></div>
+		<!-- <a href="/sign_out">Sign out</a><br/> -->
 		<nav>
+			<%= button_to current_user.goodreads_name, "/", method: :get, class: "nav-user" %>
+			<%= button_to "", "/sign_out", method: :get, class: "nav-signout" %>
 			<%= button_to "", bookclubs_path, method: :get, class: "nav-bookclubs" %>
-			<%= button_to "NB", home_path, method: :get, class: "nav-notebook" %>
-			<%= button_to "PQ", quote_search_path, method: :post, class: "nav-public" %>
+			<%= button_to "", home_path, method: :get, class: "nav-notebook" %>
+			<%= button_to "", quote_search_path, method: :post, class: "nav-public" %>
 		</nav>
 	<% else %>
-		<a href="/sign_in">Sign in with GoodReads</a>
+		<%= button_to "", "/sign_in", method: :get, class: "nav-signin" %>
+		<!-- <a href="/sign_in">Sign in with GoodReads</a> -->
 	<% end %>
 </div>
 
