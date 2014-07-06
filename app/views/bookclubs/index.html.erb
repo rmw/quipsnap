@@ -1,8 +1,6 @@
-
-
 <%= link_to "Notebook", home_path %>
 
-<div class="bookclubs-all"></div>
+<div class="bookclubs-all" data-current-user="<%= current_user.id %>"></div>
 
 <%= render "bookclubs/clubform" %>
 
