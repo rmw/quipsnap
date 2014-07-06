@@ -1,0 +1,16 @@
+@import "style_guide";
+
+ /* GLOBAL */
+
+.container {
+  margin-top: 50px;
+}
+
+* {
+  color: $main-font-color;
+}
+
+body {
+  background-color: $main-background;
+  margin: 0;
+}
