@@ -107,7 +107,7 @@ $(document).ready(function(){
 		var action = $(e.target).attr("action");
 		Comment.ajaxRequestToAdd(reply, action);
 	});
-/*
+
 	// from quote show page, user can see reply to a comment
 	$("div.quote-comments").on("click", "button.more-comments", function(e){
 		e.preventDefault();
@@ -115,5 +115,29 @@ $(document).ready(function(){
 		var parentCommentId = $(e.target).parent().attr("data-comment-id");
 		console.log(parentCommentId);
 	});
-*/	
+	
+
+	var commentChain = []
+
+	// if user on the quote show page, send an ajax request to load all comment replies
+	if ($("div.quote-comments").length > 0) {
+		var commentIds = [];
+		var comments = $("div.quote-comments").children();
+
+		for (var i = 0 ; i < comments.length; i++) {
+			commentIds.push(comments[i].getAttribute("data-comment-id"))
+		}
+		console.log("sending ajax");
+		var ajaxRequest =  $.ajax({
+			url: "/comments/replies",
+			type: "GET",
+			data: { comment_ids: commentIds }
+		});
+
+		ajaxRequest.always(function(response){
+			commentChain = response;
+			console.log(commentChain);
+		});
+	}
+
 })
