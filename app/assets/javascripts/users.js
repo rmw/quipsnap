@@ -14,7 +14,8 @@ var Users = {
     e.preventDefault();
     var bookclubId = e.target.id;
 
-    // var newBook = $(e.target).serialize();
+    $(".quotes").children().remove;
+
 
     var ajaxRequest = $.ajax({
       url: '/bookclubs/' + bookclubId,
@@ -31,7 +32,7 @@ var Users = {
 
 
   showBookclubQuotes: function(response) {
-    console.log(response);
+
     var quoteHTML = "";
     // "<div class='quote' id='<%=quote.id%>'>
     //   <div>Content: <%= quote.content %></div>
@@ -56,13 +57,12 @@ var Users = {
         quoteHTML += "<div>Title: " + title[i] + "</div>";
       }
       if (authors[i]!=null){
-        quoteHTML += "<div>Author: " + authors[i] + "</div>";
+        quoteHTML += "<div>Author: " + authors[i].name + "</div>";
       }
       quoteHTML += "<div>Created by: " + users[i] + "</div>";
       quoteHTML += "<a href='/quotes/" + quotes[i].id + "'>Show More</a>";
     }
-    $('.quotes').hide();
-    $('.bookclub_quotes').append(quoteHTML);
+    $('.quotes').html(quoteHTML);
   }
 };
 
