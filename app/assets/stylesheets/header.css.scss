@@ -1,0 +1,25 @@
+@import "style_guide";
+
+/* HEADER */
+
+header {
+  width: 100%;
+  height: 50px;
+  margin: 0;
+  background-color: $header-background;
+  position: fixed;
+  top: 0;
+  z-index: 1;
+  padding: 3px;
+  border-bottom: 2px solid $header-bottom-border;
+}
+
+.dashboard {
+  position: absolute;
+  right: 1em;
+  top: 0.5em;
+}
+
+.dashboard nav form{
+  display: inline-block;
+}
