@@ -2,7 +2,7 @@
 	<% if @bookclubs %>
 		<ul>
 		<% @bookclubs.each do |bookclub| %>
-			<li id="<%=bookclub.id%>"><%=bookclub.name%></li>
+			<li id="<%=bookclub.id%>"><%= button_tag bookclub.name, id: bookclub.id %></li>
 		<% end %>
 		</ul>
 	<% end%>

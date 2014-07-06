@@ -24,6 +24,16 @@ Rails.application.routes.draw do
 	get '/bookclubs/all' => "bookclubs#all"
 	post '/bookclubs' => "bookclubs#create"
 
+
+  post '/bookclubs/:bookclub_id/quotes/:quote_id' => 'bookclubs#add_quote'
+
+
+  get '/bookclubs/all' => "bookclubs#all"
+  post '/bookclubs' => "bookclubs#create"
+  get '/bookclubs/:bookclub_id' => 'bookclubs#show', as: "show_bookclub"
+
+
   put '/bookclubs/join' => "bookclubs#join"
+
 
 end

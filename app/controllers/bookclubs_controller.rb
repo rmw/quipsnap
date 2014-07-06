@@ -25,6 +25,16 @@ class BookclubsController < ApplicationController
     render json: {isSuccess: true}
   end
 
+
+  def show
+    @quotes = Bookclub.find(params[:bookclub_id]).quotes
+    @authors = @quotes.map { |quote| quote.author }
+    @title = @quotes.map { |quote| quote.book.title if quote.book }
+    @users = @quotes.map { |quote| quote.user.goodreads_name }
+
+    render json: {quotes: @quotes, authors: @authors, title: @title, users: @users}.to_json
+  end
+
   def join
     bookclub = Bookclub.find(params[:bookclub_id])
     bookclub.users << current_user
