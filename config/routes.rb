@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 	get '/sign_out' => "logging#sign_out"
 	get '/auth' => "logging#auth" 
 
-	get '/quotes/:id' => "quotes#show"
+	get '/quotes/:id' => "quotes#show", as: "quote"
 	post '/' => "quotes#search", as: "quote_search"
 
 
