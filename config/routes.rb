@@ -7,14 +7,13 @@ Rails.application.routes.draw do
 	get '/sign_out' => "logging#sign_out"
 	get '/auth' => "logging#auth" 
 
+	get '/quotes/:id' => "quotes#show"
 	post '/' => "quotes#search", as: "quote_search"
 
-	get '/quotes/:id' => "quotes#show", as: "quote"
 
-	post '/quotes/comments/:comment_id/create' => "comments#create", as: "new_comment_reply"
 	post '/quotes/:quote_id/comments/create' => "comments#create", as: "new_comment"
+	post '/quotes/comments/:comment_id/create' => "comments#create", as: "new_comment_reply"
 	get '/comments/replies' => "comments#get_replies"
-
 
 	get '/bookclubs' => "bookclubs#index"
 	post '/bookclubs/create' => "bookclubs#create"
@@ -34,6 +33,5 @@ Rails.application.routes.draw do
 
 
 	put '/bookclubs/join' => "bookclubs#join"
-
 
 end

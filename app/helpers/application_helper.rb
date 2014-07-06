@@ -43,6 +43,8 @@ module ApplicationHelper
     
     @author = Author.find_or_create_by(name: author_book_array[0])
     
-    recent_quote = Quote.create(content: quote.body, goodreads_link: quote.link, author: @author, book: @book)
+    Quote.create( content: quote.body, 
+                  goodreads_link: quote.link, 
+                  author: @author, book: @book)
   end
 end

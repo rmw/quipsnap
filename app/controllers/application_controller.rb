@@ -13,7 +13,9 @@ class ApplicationController < ActionController::Base
   end
 
   def oauth_consumer
-    @consumer ||= OAuth::Consumer.new(ENV['GR_KEY'], ENV['GR_SECRET'], :site => 'http://www.goodreads.com')
+    @consumer ||= OAuth::Consumer.new(ENV['GR_KEY'], 
+                                      ENV['GR_SECRET'], 
+                                      :site => 'http://www.goodreads.com')
   end
 
 end
