@@ -43,7 +43,7 @@ var Users = {
 
     for (var i=0; i<quotes.length; i++) {
       quoteHTML += "<div class='quote' id='" + quotes[i].id + "'>";
-      quoteHTML += "Content: " + quotes[i].content;
+      quoteHTML += "<div class='content'>Content: " + quotes[i].content + "</div>";
       if (title[i]!=null){
         quoteHTML += "<div>Title: " + title[i] + "</div>";
       }
@@ -52,6 +52,7 @@ var Users = {
       }
       quoteHTML += "<div>Created by: " + users[i] + "</div>";
       quoteHTML += "<a href='/quotes/" + quotes[i].id + "'>Show More</a>";
+      quoteHTML += "</div>";
     }
     $('.quotes').html(quoteHTML);
   }

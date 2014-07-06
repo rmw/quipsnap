@@ -38,10 +38,6 @@ var Quote = {
 
 };
 
-
-
-
-
 $(document).ready(function(){
 	//quote is a draggable object that reverts back to original position
 	
@@ -50,6 +46,8 @@ $(document).ready(function(){
 			var dropped = dropped && dropped[0].id == "droppable";
            return !dropped;
 		},
+		start: function(e) { $(this).css('z-index', 1)},
+		stop:  function(e) { $(this).css('z-index', 0)},
 		revertDuration: 150
 	}).each(function() {
 		var top = $(this).position().top;
