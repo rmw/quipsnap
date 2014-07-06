@@ -13,6 +13,7 @@ Rails.application.routes.draw do
 
 	post '/quotes/comments/:comment_id/create' => "comments#create", as: "new_comment_reply"
 	post '/quotes/:quote_id/comments/create' => "comments#create", as: "new_comment"
+	get '/comments/replies' => "comments#get_replies"
 
 
 	get '/bookclubs' => "bookclubs#index"
