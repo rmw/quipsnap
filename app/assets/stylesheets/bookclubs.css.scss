@@ -19,11 +19,11 @@
 			border-radius: 2px;
 			margin: 0.5em 0.5em;
 			padding: 1em 0;
-			background-color: $quote-background;
+			/*background-color: $quote-background;*/
 
 			button {
 				border: none;
-				background-color: white;
+				background-color: transparent;
 				padding: 0;
 				margin: 0;
 				width: 100%;
@@ -32,3 +32,18 @@
 		}
 	}
 }
+
+.ui-droppable {
+ 	background-color: white;
+ }
+ .mouse-hover {
+ 	background-color: blue;
+ }
+
+ .mouse-drop {
+ 	background-color: green;
+ }
+
+ .mouse-drop-false {
+ 	background-color: red;
+ }
