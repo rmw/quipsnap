@@ -26,4 +26,19 @@ class Quote < ActiveRecord::Base
 	def self.ransackable_associations(auth_obj = nil)
 		["user", "author", "book"]
 	end
+
+	def as_json(options={})
+		{
+			id: id,
+			content: content,
+			user_id: user_id,
+			created_at: created_at,
+			updated_at: updated_at,
+			book_id: book_id,
+			author_id: author_id,
+			author_name: author.name,
+			user_name: user.goodreads_name,
+			book_title: book.nil? ? "" : book.title
+		}
+	end
 end

@@ -38,7 +38,7 @@ class BookclubsController < ApplicationController
     render json: {quote_added: quote_added}
   end
 
-  # GET /quotes/:id
+  # GET /bookclubs/:bookclub_id
   def show
     @quotes = Bookclub.find(params[:bookclub_id]).quotes
     @authors = @quotes.map { |quote| quote.author }

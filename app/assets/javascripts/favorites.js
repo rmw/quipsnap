@@ -1,24 +1,38 @@
 var quoteFavorites = {
-	likeQuote: function (selector) {
+
+	init: function() {
+		// user favorites a quote
+		$(".quotes").on("click", "button.unliked-quote", this.addToFavorites.bind(this));
+		// user unfavorites a quote
+		$(".quotes").on("click", "button.liked-quote", this.removeFromFavorites.bind(this));
+	},
+
+	displayLikeQuote: function (selector) {
 		$(selector).removeClass("unliked-quote");
 		$(selector).addClass("liked-quote");
 	},
 
-	unlikeQuote: function(selector) {
+	displayUnlikeQuote: function(selector) {
 		$(selector).removeClass("liked-quote");
 		$(selector).addClass("unliked-quote");
 	},
 
-	addToFavorites: function(selector) {
-		var quoteId = $(selector).parent().parent().attr("id");
+	addToFavorites: function(e) {
+		e.preventDefault();
+		this.displayLikeQuote(e.target);
+
+		var quoteId = $(e.target).parent().parent().attr("id");
 		var ajaxRequest = $.ajax({
 			url: "/quotes/" + quoteId + "/favorite",
 			type: "post"
 		});
 	},
 
-	removeFromFavorites: function(selector) {
-		var quoteId = $(selector).parent().parent().attr("id");
+	removeFromFavorites: function(e) {
+		e.preventDefault();
+		this.displayUnlikeQuote(e.target);
+
+		var quoteId = $(e.target).parent().parent().attr("id");
 		var ajaxRequest = $.ajax({
 			url: "/quotes/" + quoteId + "/unfavorite",
 			type: "delete"
@@ -26,18 +40,58 @@ var quoteFavorites = {
 	}
 };
 
-$(document).ready(function(){
-	// user favorites a quote
-	$(".quote-options").on("click", "button.unliked-quote", function(e) {
-		e.preventDefault();
-		quoteFavorites.likeQuote(e.target);
-		quoteFavorites.addToFavorites(e.target);
-	});
+var userFavorites = {
+	init: function() {
+		$(".nav-favorites").on("click", this.getFavoriteQuotes.bind(this));
+	},
 
-	// user unfavorites a quote
-	$(".quote-options").on("click", "button.liked-quote", function(e) {
+	getFavoriteQuotes: function(e) {
 		e.preventDefault();
-		quoteFavorites.unlikeQuote(e.target);
-		quoteFavorites.removeFromFavorites(e.target);
-	});
+		var ajaxRequest = $.ajax({
+			url: "/favorites",
+			type: "get"
+		});
+
+		ajaxRequest.done(this.renderFavorites.bind(this));
+	},
+
+	renderFavorites: function(response) {
+		console.log(response);
+		$(".quotes").html("");	
+		for (var i = 0; i < response.quotes.length; i++) {
+			var html = this.getQuoteHtml(response.quotes[i]);
+			$(".quotes").append(html);
+		}
+	},
+
+	getQuoteHtml: function(quote) {
+		var html = "<div class='quote' id='" + quote.id + "'>" +
+			"<div class='content'>" + quote.content + "</div>" +
+				"<a class='search-author' data-method='post'" +
+				"href='/?q%5Bauthor_name_cont%5D=" + encodeURI(quote.author_name) + "' rel='nofollow'>" + quote.author_name + "</a>"
+		if (quote.book_title != "") {
+			html = html + "<a> , </a>" +
+				"<a class='search-title' data-method='post'" +
+				"href='/?q%5Bbook_title_cont%5D=" + encodeURI(quote.book_title) + 
+				"' rel='nofollow'>" + quote.book_title + "</a>";
+		}			
+
+		html = html + "<a class='search-user' data-method='post'" + 
+			"href='/?q%5Buser_goodreads_name_cont%5D="+ encodeURI(quote.user_name) + 
+			"' rel='nofollow'>Created by: " + quote.user_name + "</a>" + 
+			"<div class='quote-options'>" + 
+			"<button class='share-quote'>Share Quote</button>" + 
+			"<form action='/quotes/"+quote.id+"' class='button_to' method='get'><div>" +
+			"<input class='show-quote' type='submit' value='See more'></div></form>" +
+			"<button class='liked-quote'></button>" + 
+			"<button data-quote-id='" + quote.id + "' class='add-comment'>Add Comment</button></div></div>";
+
+		return html;
+	}
+
+};
+
+$(document).ready(function(){
+	quoteFavorites.init();
+	userFavorites.init();
 });

@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 	get '/quotes/:id' => "quotes#show", as: "quote"
 	post '/' => "quotes#search", as: "quote_search"
 
+	get '/favorites' => "quotes#favorites", as: "favorites"
 	post '/quotes/:id/favorite' => "quotes#favorite"
 	delete '/quotes/:id/unfavorite' => "quotes#unfavorite"
 
@@ -31,5 +32,6 @@ Rails.application.routes.draw do
 
 
 	put '/bookclubs/join' => "bookclubs#join"
+
 
 end

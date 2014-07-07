@@ -98,6 +98,10 @@ header form {
   background: url($icon-signout) no-repeat center; 
 }
 
+.nav-favorites {
+  background: url($icon-like-quote) no-repeat center; 
+}
+
 .nav-signin {
   position: relative;
   top: -5px;

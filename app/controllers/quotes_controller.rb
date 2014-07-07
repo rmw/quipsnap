@@ -28,4 +28,13 @@ class QuotesController < ApplicationController
     @is_success = @quote_fav.destroy ? true : false
     render json: {isSuccess: @is_success}
   end
+
+  # GET /favorites
+  # returns json of current user's favorited quotes
+  def favorites
+    redirect_to home_path if !logged_in?
+    @search = Quote.search(params[:q])
+    @favorites = current_user.favorites.order("updated_at DESC")
+    render json: {quotes: @favorites}
+  end
 end
