@@ -6,6 +6,7 @@ feature 'Search Quotes', :js => true do
 		quote = create(:quote)
 		quote_2 = create(:quote)
 		visit home_path
+		find("option[value='book_title_cont']").click
 		fill_in "q_book_title_cont", with: quote.book.title
 		find('.search').click
 		expect(page).to have_content(quote.book.title)
@@ -16,7 +17,8 @@ feature 'Search Quotes', :js => true do
 		quote = create(:quote)
 		quote_2 = create(:quote)
 		visit home_path
-		fill_in "q_author_name_cont", with: quote.author.name
+		find("option[value='author_name_cont']").click
+		fill_in "q_book_title_cont", with: quote.author.name
 		find('.search').click
 		expect(page).to have_content(quote.author.name)
 		expect(page).to_not have_content(quote_2.author.name)
@@ -26,7 +28,8 @@ feature 'Search Quotes', :js => true do
 		quote = create(:quote)
 		quote_2 = create(:quote)
 		visit home_path
-		fill_in "q_user_goodreads_name_cont", with: quote.user.goodreads_name
+		find("option[value='user_goodreads_name_cont']").click
+		fill_in "q_book_title_cont", with: quote.user.goodreads_name
 		find('.search').click
 		expect(page).to have_content(quote.user.goodreads_name)
 		expect(page).to_not have_content(quote_2.user.goodreads_name)
