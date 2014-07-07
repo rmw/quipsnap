@@ -3,9 +3,9 @@ var Comment = {
 
 	formHTML: function(quoteId){
 		return "<form class='comment-form' action='/quotes/" + quoteId + "/comments/create' method='post'> " +
-		  "<input class='comment-box' name='comment' type='textarea' placeholder='Your comment here' /><br />" +
+		  "<textarea class='comment-box' name='comment' placeholder='Your comment here' /></textarea><br />" +
 		  "<input name='commit' type='submit' value='Submit Comment' />" +
-		"</form>";
+		"<input value='Cancel' type='button' class='cancel-comment'/></form>";
 	},
 
 	commentHTML: function(commentId, content, user) {
@@ -35,9 +35,9 @@ var Comment = {
 
 	replyFormHTML: function(commentId){
 		return "<form class='reply-comment-form' action='/quotes/comments/" + commentId + "/create' method='post'> " +
-		  "<input class='reply-comment-box' name='reply' type='textarea' placeholder='Your reply here' /><br />" +
+		  "<textarea class='reply-comment-box' name='reply' placeholder='Your reply here' /></textarea><br />" +
 		  "<input name='commit' type='submit' value='Submit Reply' />" +
-		"</form>";
+		"<input value='Cancel' type='button' class='cancel-reply'/></form>";
 	},
 
 	// display the add comment form to the user
@@ -49,7 +49,11 @@ var Comment = {
 	// display the add reply form to the user
 	displayReplyForm: function(selector, commentId) {
 		var html = this.replyFormHTML(commentId);
-		$(selector).append(html);
+		$(selector).children(".less-comments").after(html);
+		$(selector).children(".more-comments").after(html);
+		if ($(selector).children(".more-comments").length == 0 && $(selector).children(".less-comments").length == 0) {
+			$(selector).children(".reply-comment").after(html);
+		}
 	},
 
 	// let the user briefly know if comment was saved successfully
@@ -114,6 +118,10 @@ var Comment = {
 				this.recursiveCall(comment.replies[i]);
 			}	
 		}
+	},
+
+	removeForm: function(e) {
+		$(e.target).parent().remove();
 	}
 
 }
@@ -129,7 +137,7 @@ $(document).ready(function(){
 	// when user submits a comment
 	$("div.quote").on("submit", "form.comment-form", function(e){
 		e.preventDefault();
-		var comment = $(e.target).children("input.comment-box").val();
+		var comment = $(e.target).children("textarea.comment-box").val();
 		var action = $(e.target).attr("action");
 		Comment.ajaxRequestToAdd(comment, action);
 	});	
@@ -145,16 +153,19 @@ $(document).ready(function(){
 	// from quote show page, user submits a reply to a comment
 	$("div.quote-comments").on("submit", "form.reply-comment-form", function(e){
 		e.preventDefault();
-		var reply = $(e.target).children("input.reply-comment-box").val();
+		var reply = $(e.target).children("textarea.reply-comment-box").val();
 		var action = $(e.target).attr("action");
 		Comment.ajaxRequestToAdd(reply, action);
 	});
+
+	// user cancels adding a comment or a reply
+	$("div.quotes").on("click", ".cancel-comment", Comment.removeForm.bind(this));
+	$("div.quote-comments").on("click", ".cancel-reply", Comment.removeForm.bind(this));
 
 	// from quote show page, user can expand replies for a comment
 	$("div.quote-comments").on("click", "button.more-comments", function(e){
 		e.preventDefault();
 		$(e.target).parent().children('div.quote-comment').show();
-		// $(e.target).text("Hide replies");
 		$(e.target).removeClass("more-comments");
 		$(e.target).addClass("less-comments");
 	});
@@ -171,12 +182,12 @@ $(document).ready(function(){
 	// if user is on the quote show page, send an ajax request to get all comment replies
 	if ($("div.quote-comments").length > 0) {
 		var commentIds = [];
-		var comments = $("div.quote-comments").children();
+		var comments = $("div.quote-comments").children(".quote-comment");
 
 		for (var i = 0 ; i < comments.length; i++) {
 			commentIds.push(comments[i].getAttribute("data-comment-id"))
 		}
-
+		// console.log(commentIds);
 		var ajaxRequest =  $.ajax({
 			url: "/comments/replies",
 			type: "GET",
