@@ -6,3 +6,47 @@
   width: 400px;
   margin: 0 auto;
  }
+
+
+button {
+    display: inline-block;
+    width: 5em;
+  }
+
+ .popup {
+    height: 25px;
+    width: 60px;
+    text-align: center;
+    vertical-align:middle;
+    background-color: $instruction-background;
+    color: white;
+    display: none;
+    padding-top: 8px;
+    position: absolute;
+
+
+    .Signout {
+    	left: 75px;
+    }
+
+    .Bookclubs {
+    	left: 90px;
+    }
+
+    .Notebook {
+    	left: 110px;
+    }
+
+    .Favorites {
+    	left: 100px;
+    }
+
+    .Public {
+    	left: 120px;
+    }
+}
+
+.qtip-content {
+    font-size:18px;
+}
+

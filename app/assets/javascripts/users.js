@@ -10,6 +10,68 @@ var Users = {
     // this.renderList();
   },
 
+  instructionsHover: function() {
+    $('input.nav-signout').qtip({
+        content: 'Signout',
+        style: {
+                 classes: 'qtip-blue qtip-shadow qtip-rounded qtip-cluetip',
+                 'font-size': '12px'
+
+              },
+        position: {
+                    my: 'top center',  // Position my top left...
+                    at: 'bottom center', // at the bottom right of...
+                    target: $('input.nav-signout') // my target
+              }
+        });
+    $('input.nav-bookclubs').qtip({
+        content: 'Bookclubs',
+        style: {
+                color: 'black'
+              },
+              position: {
+                    my: 'top center',  // Position my top left...
+                    at: 'bottom center', // at the bottom right of...
+                    target: $('input.nav-bookclubs') // my target
+              }
+        });
+    $('input.nav-favorites').qtip({
+        content: 'My Favorites',
+        style: {
+                color: 'black'
+              },
+              position: {
+                    my: 'top center',  // Position my top left...
+                    at: 'bottom center', // at the bottom right of...
+                    target: $('input.nav-favorites') // my target
+              }
+        });
+    $('input.nav-notebook').qtip({
+        content: 'My Notebook',
+        style: {
+                color: 'black'
+              },
+              position: {
+                    my: 'top center',  // Position my top left...
+                    at: 'bottom center', // at the bottom right of...
+                    target: $('input.nav-notebook') // my target
+              }
+        });
+    $('input.nav-public').qtip({
+        content: 'All Quotes',
+        style: {
+                color: 'black'
+              },
+              position: {
+                    my: 'top center',  // Position my top left...
+                    at: 'bottom center', // at the bottom right of...
+                    target: $('input.nav-public') // my target
+              }
+        });
+        
+      },
+  
+
   showQuotesForThisBookclub: function(e) {
     e.preventDefault();
     var bookclubId = e.target.id;
@@ -64,6 +126,10 @@ var Users = {
 //On document load
 $(document).ready(function(){
   Users.init();
+
+  Users.instructionsHover();
+    
+
 
 
 
