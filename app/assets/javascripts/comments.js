@@ -21,7 +21,7 @@ var Comment = {
 				"<div>" + content + "</div>" +
 				"<div>Posted by: " + user + "</div>" + 
 				"<button class='reply-comment'>Reply</button>" +
-				"<button class='more-comments'>See replies</button>" + 
+				"<button class='more-comments'></button>" + 
 			"</div>"
 	},
 
@@ -46,7 +46,7 @@ var Comment = {
 		$(selector).append(html);
 	}, 
 
-	// display the add comment form to the user
+	// display the add reply form to the user
 	displayReplyForm: function(selector, commentId) {
 		var html = this.replyFormHTML(commentId);
 		$(selector).append(html);
@@ -74,7 +74,7 @@ var Comment = {
 				// if the parent div does not have a hide/see replies button, add it
 				var parentDiv = $("div[data-comment-id="+response.parent_id+"]") 
 				if (parentDiv.children("button.less-comments").length == 0 && parentDiv.children("button.more-comments").length == 0) {
-					parentDiv.append("<button class='less-comments'>Hide replies</button>");
+					parentDiv.append("<button class='less-comments'></button>");
 				}
 				parentDiv.append(this.commentHTML(response.comment_id, response.comment_content, response.user));
 			}
@@ -154,7 +154,7 @@ $(document).ready(function(){
 	$("div.quote-comments").on("click", "button.more-comments", function(e){
 		e.preventDefault();
 		$(e.target).parent().children('div.quote-comment').show();
-		$(e.target).text("Hide replies");
+		// $(e.target).text("Hide replies");
 		$(e.target).removeClass("more-comments");
 		$(e.target).addClass("less-comments");
 	});
@@ -163,7 +163,7 @@ $(document).ready(function(){
 	$("div.quote-comments").on("click", "button.less-comments", function(e){
 		e.preventDefault();
 		$(e.target).parent().children('div.quote-comment').hide();
-		$(e.target).text("See replies");
+		// $(e.target).text("See replies");
 		$(e.target).removeClass("less-comments");
 		$(e.target).addClass("more-comments");
 	});
