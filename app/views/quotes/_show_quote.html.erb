@@ -1,5 +1,5 @@
 <div class="quote" id="<%=quote.id%>">
-	<div class="content">"<%= quote.content %>"</div>
+	<div class="content"><%= quote.content %></div>
 		<%= link_to quote.author.name, quote_search_path(q: {author_name_cont: quote.author.name}), method: :post, class: "search-author" %>
 	<% unless quote.book.nil? %>
 		<a>,</a> <%= link_to quote.book.title, quote_search_path(q: {book_title_cont: quote.book.title}), method: :post, class: "search-title" %>
