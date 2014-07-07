@@ -111,6 +111,28 @@ var Users = {
                     target: this // my target
               }
         }).bind(this);
+    $('input.search').qtip({
+        content: 'Search',
+        style: {
+                classes: 'qtip-blue qtip-shadow qtip-rounded'
+              },
+              position: {
+                    my: 'top center',  // Position my top left...
+                    at: 'bottom center', // at the bottom right of...
+                    target: this // my target
+              }
+        }).bind(this);
+    $('input.clear-search').qtip({
+        content: 'Clear Search',
+        style: {
+                classes: 'qtip-blue qtip-shadow qtip-rounded'
+              },
+              position: {
+                    my: 'top center',  // Position my top left...
+                    at: 'bottom center', // at the bottom right of...
+                    target: this // my target
+              }
+        }).bind(this);
         
       },
   
