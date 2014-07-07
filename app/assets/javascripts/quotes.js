@@ -38,9 +38,7 @@ var Quote = {
 
 };
 
-$(document).ready(function(){
-	//quote is a draggable object that reverts back to original position
-	
+var makeDraggable = function() {
 	$("div.quote").draggable({
 		revert: function(dropped){
 			var dropped = dropped && dropped[0].id == "droppable";
@@ -87,6 +85,12 @@ $(document).ready(function(){
 		out:Quote.offOfBookclub
 	
 	});
+
+};
+
+$(document).ready(function(){
+	//quote is a draggable object that reverts back to original position
+	makeDraggable();
 
 })
 
