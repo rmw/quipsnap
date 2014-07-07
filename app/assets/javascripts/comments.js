@@ -123,7 +123,7 @@ $(document).ready(function(){
 	$("button.add-comment").on("click", function(e){
 		e.preventDefault();
 		$("form.comment-form").remove();
-		Comment.displayForm($(e.target).parent(), $(e.target).attr("data-quote-id"));
+		Comment.displayForm($(e.target).parent().parent(), $(e.target).attr("data-quote-id"));
 	});
 
 	// when user submits a comment
