@@ -41,11 +41,13 @@ class BookclubsController < ApplicationController
   # GET /bookclubs/:bookclub_id
   def show
     @quotes = Bookclub.find(params[:bookclub_id]).quotes
-    @authors = @quotes.map { |quote| quote.author }
-    @title = @quotes.map { |quote| quote.book.title if quote.book }
-    @users = @quotes.map { |quote| quote.user.goodreads_name }
+    if logged_in?
+      @favorites = @quotes.map do |quote| 
+        QuoteFavorite.find_by(quote_id: quote.id, user_id: current_user.id) ? true : false
+      end
+    end
 
-    render json: {quotes: @quotes, authors: @authors, title: @title, users: @users}.to_json
+    render json: {quotes: @quotes, is_favorites: @favorites } 
   end
 
   # PUT /bookclubs/join

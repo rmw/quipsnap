@@ -1,8 +1,8 @@
 <div class="quote" id="<%=quote.id%>">
 	<div class="content"><img src='/icons/openingquote.png'/><p><%= quote.content %></p><img src='/icons/closingquote.png'/></div>
-		<div class="quote-info"><%= link_to quote.author.name, quote_search_path(q: {author_name_cont: quote.author.name}), method: :post, class: "search-author" %>,
+		<div class="quote-info"><%= link_to quote.author.name, quote_search_path(q: {author_name_cont: quote.author.name}), method: :post, class: "search-author" %>
 	<% unless quote.book.nil? %>
-		 <%= link_to quote.book.title, quote_search_path(q: {book_title_cont: quote.book.title}), method: :post, class: "search-title" %>
+		<br/><%= link_to quote.book.title, quote_search_path(q: {book_title_cont: quote.book.title}), method: :post, class: "search-title" %>
 	<% end %>
 		</div>
 
