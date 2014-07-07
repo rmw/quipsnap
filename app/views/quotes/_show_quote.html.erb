@@ -10,7 +10,7 @@
 
 	<div class='quote-options'>
 		<button class="share-quote">Share Quote</button>
-		<button class="like-quote">Favorite Quote</button>
+		<button class="unliked-quote">Favorite Quote</button>
 		<%= button_to "See more", quote_path(quote), method: :get, class: "show-quote" %>
 		<% if logged_in? %>
 			<button data-quote-id='<%= quote.id %>' class="add-comment">Add Comment</button>
