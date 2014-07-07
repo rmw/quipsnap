@@ -12,15 +12,10 @@
 		<nav>
 			<%= button_to current_user.goodreads_name, "/", method: :get, class: "nav-user" %>
 			<%= button_to "", "/sign_out", method: :get, class: "nav-signout", title: "Signout" %>
-			<div class='popup Signout'>Signout</div>
 			<%= button_to "", bookclubs_path, method: :get, class: "nav-bookclubs" %>
-			<div class='popup Bookclubs'>Bookclubs</div>
 			<%= button_to "", home_path, method: :get, class: "nav-notebook" %>
-			<div class='popup Notebook'>My Notebook</div>
 			<%= button_to "", quote_search_path, method: :post, class: "nav-public" %>
-			<div class='popup Public'>Public Quotes</div>
 			<%= button_to "", favorites_path, method: :get, class: "nav-favorites" %>
-			<div class='popup Favorites'>My Favorites</div>
 		</nav>
 	<% else %>
 		<%= button_to "", "/sign_in", method: :get, class: "nav-signin" %>

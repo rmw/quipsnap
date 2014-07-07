@@ -14,9 +14,7 @@ var Users = {
     $('input.nav-signout').qtip({
         content: 'Signout',
         style: {
-                 classes: 'qtip-blue qtip-shadow qtip-rounded qtip-cluetip',
-                 'font-size': '12px'
-
+                 classes: 'qtip-blue qtip-shadow qtip-rounded'
               },
         position: {
                     my: 'top center',  // Position my top left...
@@ -27,47 +25,91 @@ var Users = {
     $('input.nav-bookclubs').qtip({
         content: 'Bookclubs',
         style: {
-                color: 'black'
+                classes: 'qtip-blue qtip-shadow qtip-rounded'
               },
               position: {
                     my: 'top center',  // Position my top left...
                     at: 'bottom center', // at the bottom right of...
-                    target: $('input.nav-bookclubs') // my target
+                    target: this // my target
               }
-        });
+        }).bind(this);
     $('input.nav-favorites').qtip({
         content: 'My Favorites',
         style: {
-                color: 'black'
+                classes: 'qtip-blue qtip-shadow qtip-rounded'
               },
               position: {
                     my: 'top center',  // Position my top left...
                     at: 'bottom center', // at the bottom right of...
-                    target: $('input.nav-favorites') // my target
+                    target: this // my target
               }
-        });
+        }).bind(this);
     $('input.nav-notebook').qtip({
         content: 'My Notebook',
         style: {
-                color: 'black'
+                classes: 'qtip-blue qtip-shadow qtip-rounded'
               },
               position: {
                     my: 'top center',  // Position my top left...
                     at: 'bottom center', // at the bottom right of...
-                    target: $('input.nav-notebook') // my target
+                    target: this // my target
               }
-        });
+        }).bind(this);
     $('input.nav-public').qtip({
         content: 'All Quotes',
         style: {
-                color: 'black'
+                classes: 'qtip-blue qtip-shadow qtip-rounded'
               },
               position: {
                     my: 'top center',  // Position my top left...
                     at: 'bottom center', // at the bottom right of...
-                    target: $('input.nav-public') // my target
+                    target: this // my target
               }
-        });
+        }).bind(this);
+    $('button.liked-quote').qtip({
+        content: 'Unfave This!',
+        style: {
+                classes: 'qtip-blue qtip-shadow qtip-rounded'
+              },
+              position: {
+                    my: 'top center',  // Position my top left...
+                    at: 'bottom center', // at the bottom right of...
+                    target: this // my target
+              }
+        }).bind(this);
+    $('button.unliked-quote').qtip({
+        content: 'Fave This!',
+        style: {
+                classes: 'qtip-blue qtip-shadow qtip-rounded'
+              },
+              position: {
+                    my: 'top center',  // Position my top left...
+                    at: 'bottom center', // at the bottom right of...
+                    target: this // my target
+              }
+        }).bind(this);
+    $('button.share-quote').qtip({
+        content: 'Share!',
+        style: {
+                classes: 'qtip-blue qtip-shadow qtip-rounded'
+              },
+              position: {
+                    my: 'top center',  // Position my top left...
+                    at: 'bottom center', // at the bottom right of...
+                    target: this // my target
+              }
+        }).bind(this);
+    $('button.add-comment').qtip({
+        content: 'Add Comment',
+        style: {
+                classes: 'qtip-blue qtip-shadow qtip-rounded'
+              },
+              position: {
+                    my: 'top center',  // Position my top left...
+                    at: 'bottom center', // at the bottom right of...
+                    target: this // my target
+              }
+        }).bind(this);
         
       },
   
