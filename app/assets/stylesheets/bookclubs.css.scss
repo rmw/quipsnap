@@ -33,6 +33,53 @@
 	}
 }
 
+div.bookclubs-all {
+	float:left;
+	width:35%;
+}
+
+div.bookclubs-all {
+
+
+	ul {
+		text-align: center;
+		list-style-type: none;
+		padding: 0;
+
+		li {
+			border: 1px $quote-border solid;
+			border-radius: 2px;
+			margin: 0.5em 0.5em;
+			padding: 1em 0;
+			background-color: $quote-background;
+
+			button {
+				border: none;
+				background-color: transparent;
+				padding: 0;
+				margin: 0;
+				width: 100%;
+				cursor: pointer;
+			}
+
+			button.bookclub-join {
+				float: right;
+				border: solid 2px black;
+			}
+		}
+	}
+}
+
+form#new_bookclub {
+	float:left;
+	margin-top: 1em;
+	width:55%;
+	background-color: $quote-background;
+	height: 250px;
+
+}
+
+
 .ui-droppable {
  	background-color: white;
  }
