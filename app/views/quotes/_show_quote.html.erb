@@ -1,0 +1,19 @@
+<div class="quote" id="<%=quote.id%>">
+	<div class="content">"<%= quote.content %>"</div>
+		<%= link_to quote.author.name, quote_search_path(q: {author_name_cont: quote.author.name}), method: :post, class: "search-author" %>
+	<% unless quote.book.nil? %>
+		<a>,</a> <%= link_to quote.book.title, quote_search_path(q: {book_title_cont: quote.book.title}), method: :post, class: "search-title" %>
+	<% end %>
+
+
+	<%= link_to "Created by: " + quote.user.goodreads_name, quote_search_path(q: {user_goodreads_name_cont: quote.user.goodreads_name}), method: :post, class: "search-user" %>
+
+	<div class='quote-options'>
+		<button class="share-quote">Share Quote</button>
+		<button class="like-quote">Favorite Quote</button>
+		<%= button_to "See more", quote_path(quote), method: :get, class: "show-quote" %>
+		<% if logged_in? %>
+			<button data-quote-id='<%= quote.id %>' class="add-comment">Add Comment</button>
+		<% end %>
+	</div>
+</div>

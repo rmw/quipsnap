@@ -1,12 +1,46 @@
+@import "style_guide";
+
 div.quote-comments {
 	width: 80%;
 	margin: 0 auto;
 }
 
 div.quote-comment {
-	margin: 2px 0 2px 20px;
-	padding: 2px;
+	margin: 10px 0 10px 20px;
+	padding: 5px;
 	border-left: 1px solid lightgrey;
 	border-top: 1px solid lightgrey;
 	background-color: white;
+
+	button {
+	    border: none;
+	    margin-left: 10px;
+	    margin-top: 5px;
+	    background-color: transparent;
+	    width: 15px;
+	    height: 15px;
+	    vertical-align: bottom;
+	    cursor: pointer;
+	    outline: none;
+	    opacity: 0.4;
+	}
+
+	button:hover {
+    	opacity: 0.7;
+  	}
+}
+
+button.more-comments {
+	background: url($icon-see-replies) no-repeat center;
+    background-size: contain;
+}
+
+button.less-comments {
+	background: url($icon-hide-replies) no-repeat center;
+    background-size: contain;	
+}
+
+button.reply-comment {
+	background: url($icon-comment) no-repeat center;
+    background-size: contain;	
 }
