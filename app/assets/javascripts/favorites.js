@@ -2,9 +2,9 @@ var quoteFavorites = {
 
 	init: function() {
 		// user favorites a quote
-		$(".quotes").on("click", "button.unliked-quote", this.addToFavorites.bind(this));
+		$(".quotes, .show-quote").on("click", "button.unliked-quote", this.addToFavorites.bind(this));
 		// user unfavorites a quote
-		$(".quotes").on("click", "button.liked-quote", this.removeFromFavorites.bind(this));
+		$(".quotes, .show-quote").on("click", "button.liked-quote", this.removeFromFavorites.bind(this));
 	},
 
 	displayLikeQuote: function (selector) {
