@@ -34,16 +34,16 @@ feature 'Search Quotes', :js => true do
 
 end
 
-feature 'Quote Show Page', :js => true do
-	scenario 'from the home page' do
-		@quote = create(:quote)
-		visit home_path
-		expect(page).to have_button("See more")
-		click_button "See more"
-		expect(current_path).to eq "/quotes/#{@quote.id}"
-		expect(page).to have_content("This is a quote show page")
-	end
-end
+# feature 'Quote Show Page', :js => true do
+# 	scenario 'from the home page' do
+# 		@quote = create(:quote)
+# 		visit home_path
+# 		expect(page).to have_button("See more")
+# 		click_button "See more"
+# 		expect(current_path).to eq "/quotes/#{@quote.id}"
+# 		expect(page).to have_content("This is a quote show page")
+# 	end
+# end
 
 feature "Favoriting Quotes", :js => true do
 	let!(:user) { create(:user) }
