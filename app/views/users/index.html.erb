@@ -2,7 +2,7 @@
 
 <div class="quotes">
 		<% @quotes.each do |quote| %>
-			<%= render partial: "quotes/show_quote", locals: {quote: quote} %>
+			<%= render partial: "quotes/show_quote_limit", locals: {quote: quote} %>
 		<% end %>
 </div>
 
