@@ -15,7 +15,7 @@ var Users = {
     $('input.nav-signout').qtip({
         content: 'Signout',
         style: {
-                 classes: 'qtip-blue qtip-shadow qtip-rounded'
+                 classes: 'qtip-green qtip-rounded'
               },
         position: {
                     my: 'top center',  // Position my top left...
@@ -26,7 +26,7 @@ var Users = {
     $('input.nav-bookclubs').qtip({
         content: 'Bookclubs',
         style: {
-                classes: 'qtip-blue qtip-shadow qtip-rounded'
+                classes: 'qtip-green qtip-rounded'
               },
               position: {
                     my: 'top center',  // Position my top left...
@@ -35,9 +35,9 @@ var Users = {
               }
         }).bind(this);
     $('input.nav-favorites').qtip({
-        content: 'My Favorites',
+        content: 'Favorites',
         style: {
-                classes: 'qtip-blue qtip-shadow qtip-rounded'
+                classes: 'qtip-green qtip-rounded'
               },
               position: {
                     my: 'top center',  // Position my top left...
@@ -48,7 +48,7 @@ var Users = {
     $('input.nav-notebook').qtip({
         content: 'My Notebook',
         style: {
-                classes: 'qtip-blue qtip-shadow qtip-rounded'
+                classes: 'qtip-green qtip-rounded'
               },
               position: {
                     my: 'top center',  // Position my top left...
@@ -59,7 +59,7 @@ var Users = {
     $('input.nav-public').qtip({
         content: 'All Quotes',
         style: {
-                classes: 'qtip-blue qtip-shadow qtip-rounded'
+                classes: 'qtip-green qtip-rounded'
               },
               position: {
                     my: 'top center',  // Position my top left...
@@ -68,9 +68,9 @@ var Users = {
               }
         }).bind(this);
     $('button.liked-quote').qtip({
-        content: 'Unfave This!',
+        content: 'Unfave',
         style: {
-                classes: 'qtip-blue qtip-shadow qtip-rounded'
+                classes: 'qtip-green qtip-rounded'
               },
               position: {
                     my: 'top center',  // Position my top left...
@@ -79,9 +79,9 @@ var Users = {
               }
         }).bind(this);
     $('button.unliked-quote').qtip({
-        content: 'Fave This!',
+        content: 'Fave',
         style: {
-                classes: 'qtip-blue qtip-shadow qtip-rounded'
+                classes: 'qtip-green qtip-rounded'
               },
               position: {
                     my: 'top center',  // Position my top left...
@@ -92,7 +92,7 @@ var Users = {
     $('button.share-quote').qtip({
         content: 'Share!',
         style: {
-                classes: 'qtip-blue qtip-shadow qtip-rounded'
+                classes: 'qtip-green qtip-rounded'
               },
               position: {
                     my: 'top center',  // Position my top left...
@@ -103,7 +103,7 @@ var Users = {
     $('button.add-comment').qtip({
         content: 'Add Comment',
         style: {
-                classes: 'qtip-blue qtip-shadow qtip-rounded'
+                classes: 'qtip-green qtip-rounded'
               },
               position: {
                     my: 'top center',  // Position my top left...
