@@ -15,6 +15,7 @@
 			<%= button_to "", bookclubs_path, method: :get, class: "nav-bookclubs" %>
 			<%= button_to "", home_path, method: :get, class: "nav-notebook" %>
 			<%= button_to "", quote_search_path, method: :post, class: "nav-public" %>
+			<%= button_to "", favorites_path, method: :get, class: "nav-favorites" %>
 		</nav>
 	<% else %>
 		<%= button_to "", "/sign_in", method: :get, class: "nav-signin" %>
