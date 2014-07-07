@@ -27,7 +27,7 @@ class CommentsController < ApplicationController
 	# GET /comments/replies
 	def get_replies
 		reply_chain = params[:comment_ids].nil? ? [] : params[:comment_ids].map{ |id| Comment.find(id.to_i).all_replies }
-		render json: reply_chain
+		render json: { comments: reply_chain, isLoggedIn: logged_in? }
 	end
 
 end

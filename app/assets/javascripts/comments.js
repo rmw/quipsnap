@@ -8,29 +8,35 @@ var Comment = {
 		"<input value='Cancel' type='button' class='cancel-comment'/></form>";
 	},
 
-	commentHTML: function(commentId, content, user) {
-		return	"<div data-comment-id='" + commentId + "' class='quote-comment'>" +
+	commentHTML: function(commentId, content, user, isLoggedIn) {
+		var html = "<div data-comment-id='" + commentId + "' class='quote-comment'>" +
 				"<div>" + content + "</div>" +
-				"<div>Posted by: " + user + "</div>" + 
-				"<button class='reply-comment'>Reply</button>" +
-			"</div>"
+				"<div>Posted by: " + user + "</div>";
+
+		if (isLoggedIn) {
+			html = html + "<button class='reply-comment'>Reply</button>";
+		} 
+		return html + "</div>";
 	},
 
-	hiddenCommentHTML: function(commentId, content, user) {
-		return	"<div style='display:none' data-comment-id='" + commentId + "' class='quote-comment'>" +
+	hiddenCommentHTML: function(commentId, content, user, isLoggedIn) {
+		var html = "<div style='display:none' data-comment-id='" + commentId + "' class='quote-comment'>" +
 				"<div>" + content + "</div>" +
-				"<div>Posted by: " + user + "</div>" + 
-				"<button class='reply-comment'>Reply</button>" +
-				"<button class='more-comments'></button>" + 
-			"</div>"
+				"<div>Posted by: " + user + "</div>";
+		if (isLoggedIn) {
+			html = html + "<button class='reply-comment'>Reply</button>";
+		} 
+		return html + "<button class='more-comments'></button></div>"
 	},
 
-	lastHiddenCommentHTML: function(commentId, content, user) {
-		return	"<div style='display:none' data-comment-id='" + commentId + "' class='quote-comment'>" +
+	lastHiddenCommentHTML: function(commentId, content, user, isLoggedIn) {
+		var html = "<div style='display:none' data-comment-id='" + commentId + "' class='quote-comment'>" +
 				"<div>" + content + "</div>" +
-				"<div>Posted by: " + user + "</div>" + 
-				"<button class='reply-comment'>Reply</button>" +
-			"</div>"
+				"<div>Posted by: " + user + "</div>";
+		if (isLoggedIn) {
+			html = html + "<button class='reply-comment'>Reply</button>";
+		} 
+		return html + "</div>";
 	},
 
 	replyFormHTML: function(commentId){
@@ -62,11 +68,11 @@ var Comment = {
 		$("form.comment-form").remove();
 		$("form.reply-comment-form").remove();
 		
-		$("body").prepend("<div class='add-comment-response'>" + message + "</div>");
+		// $("body").prepend("<div class='add-comment-response'>" + message + "</div>");
 
-		setTimeout(function() {
-		  $("div.add-comment-response").remove();
-		}, 1000);
+		// setTimeout(function() {
+		//   $("div.add-comment-response").remove();
+		// }, 1000);
 	},
 
 	appendResponse: function(response) {
@@ -101,21 +107,21 @@ var Comment = {
 
 	},
 
-	appendCommentChain: function(){
+	appendCommentChain: function(isLoggedIn){
 		for (var i = 0; i < this.commentChain.length; i++) {
 			for (var j = 0; j < this.commentChain[i].replies.length; j++) {
-				this.recursiveCall(this.commentChain[i].replies[j]);
+				this.recursiveCall(this.commentChain[i].replies[j], isLoggedIn);
 			}
 		}
 	},
 
-	recursiveCall: function(comment) {
+	recursiveCall: function(comment, isLoggedIn) {
 		if (comment.replies.length == 0) {
-			$("div[data-comment-id="+comment.parent_id+"]").append(this.lastHiddenCommentHTML(comment.comment_id, comment.comment_content, comment.user));
+			$("div[data-comment-id="+comment.parent_id+"]").append(this.lastHiddenCommentHTML(comment.comment_id, comment.comment_content, comment.user, isLoggedIn));
 		} else {
-			$("div[data-comment-id="+comment.parent_id+"]").append(this.hiddenCommentHTML(comment.comment_id, comment.comment_content, comment.user));
+			$("div[data-comment-id="+comment.parent_id+"]").append(this.hiddenCommentHTML(comment.comment_id, comment.comment_content, comment.user, isLoggedIn));
 			for (var i = 0; i < comment.replies.length; i++) {
-				this.recursiveCall(comment.replies[i]);
+				this.recursiveCall(comment.replies[i], isLoggedIn);
 			}	
 		}
 	},
@@ -128,14 +134,14 @@ var Comment = {
 
 $(document).ready(function(){
 	// when user adds a comment
-	$("button.add-comment").on("click", function(e){
+	$("div.quotes").on("click", "button.add-comment", function(e){
 		e.preventDefault();
 		$("form.comment-form").remove();
 		Comment.displayForm($(e.target).parent().parent(), $(e.target).attr("data-quote-id"));
 	});
 
 	// when user submits a comment
-	$("div.quote").on("submit", "form.comment-form", function(e){
+	$("div.quotes").on("submit", "form.comment-form", function(e){
 		e.preventDefault();
 		var comment = $(e.target).children("textarea.comment-box").val();
 		var action = $(e.target).attr("action");
@@ -174,7 +180,6 @@ $(document).ready(function(){
 	$("div.quote-comments").on("click", "button.less-comments", function(e){
 		e.preventDefault();
 		$(e.target).parent().children('div.quote-comment').hide();
-		// $(e.target).text("See replies");
 		$(e.target).removeClass("less-comments");
 		$(e.target).addClass("more-comments");
 	});
@@ -187,7 +192,7 @@ $(document).ready(function(){
 		for (var i = 0 ; i < comments.length; i++) {
 			commentIds.push(comments[i].getAttribute("data-comment-id"))
 		}
-		// console.log(commentIds);
+
 		var ajaxRequest =  $.ajax({
 			url: "/comments/replies",
 			type: "GET",
@@ -195,8 +200,8 @@ $(document).ready(function(){
 		});
 
 		ajaxRequest.always(function(response){
-			Comment.commentChain = response;
-			Comment.appendCommentChain();
+			Comment.commentChain = response.comments;
+			Comment.appendCommentChain(response.isLoggedIn);
 		});
 	}
 
