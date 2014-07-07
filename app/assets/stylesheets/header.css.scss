@@ -11,14 +11,41 @@ header {
   top: 0;
   z-index: 1;
   padding: 3px;
-  border-bottom: 2.5px solid $header-bottom-border;
 }
+
+/* LOGO */
+
+div.logo {
+  display: inline-block;
+  margin-left: 1.6em;
+
+  span {
+    font-size: $logo-font-size;
+    font-family: $logo-font-family;
+    font-weight: 700;
+    color: $logo-color;
+    vertical-align: top;
+    line-height: 38px;
+  }
+
+  span.munk {
+    color: $logo-color-2;
+  }
+
+  img {
+    height: 50px;
+    margin: 0 0 0 6px;
+  }
+
+}
+
+
+/* DASHBOARD */
 
 .dashboard {
   position: absolute;
   right: 1em;
   top: 0.5em;
-
 }
 
 .dashboard nav { 
@@ -55,10 +82,11 @@ header form {
 }
 
 .search-bar {
-  width: 70%;
-  margin: 0 auto;
-  position: relative;
-  top: -5px;
+  display: inline-block;
+  width: 50%;
+  position: absolute;
+  top: 30%;
+  left: 25%;
   text-align: center;
 
   input[type='submit'] {
