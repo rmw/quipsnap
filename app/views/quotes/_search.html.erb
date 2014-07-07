@@ -1,6 +1,6 @@
 
 
-
+<a>Search By:</a>
 <%= search_form_for @search, url: quote_search_category_path, html: { method: :post } do |f| %>
 
 	
@@ -17,4 +17,3 @@
   <%= f.submit "", class: "search" %>
 <% end %>
 
-<%= button_to "", home_path, method: :get, class: "clear-search" %>
