@@ -10,9 +10,11 @@ Rails.application.routes.draw do
 	get '/quotes/:id' => "quotes#show", as: "quote"
 	post '/' => "quotes#search", as: "quote_search"
 
+	post '/quotes/:id/favorite' => "quotes#favorite"
+	delete '/quotes/:id/unfavorite' => "quotes#unfavorite"
 
-	post '/quotes/:quote_id/comments/create' => "comments#create", as: "new_comment"
 	post '/quotes/comments/:comment_id/create' => "comments#create", as: "new_comment_reply"
+	post '/quotes/:quote_id/comments/create' => "comments#create", as: "new_comment"
 	get '/comments/replies' => "comments#get_replies"
 
 	get '/bookclubs' => "bookclubs#index"
@@ -22,10 +24,6 @@ Rails.application.routes.draw do
 
 	get '/bookclubs/all' => "bookclubs#all"
 	post '/bookclubs' => "bookclubs#create"
-
-
-	post '/bookclubs/:bookclub_id/quotes/:quote_id' => 'bookclubs#add_quote'
-
 
 	get '/bookclubs/all' => "bookclubs#all"
 	post '/bookclubs' => "bookclubs#create"

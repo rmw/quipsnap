@@ -44,3 +44,40 @@ feature 'Quote Show Page', :js => true do
 		expect(page).to have_content("This is a quote show page")
 	end
 end
+
+feature "Favoriting Quotes", :js => true do
+	let!(:user) { create(:user) }
+	
+	scenario 'when a quote is not favorited' do
+		allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
+		allow_any_instance_of(ApplicationController).to receive(:logged_in?).and_return(true)
+		user_quote = create(:quote)
+    	user.quotes << user_quote
+		visit home_path
+		expect(page).to have_selector(".unliked-quote")
+		find(".unliked-quote").click
+		expect(page).to have_selector(".liked-quote")
+		expect(page).to_not have_selector(".unliked-quote")
+	end
+
+	scenario 'when a quote is already favorited' do
+		allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
+		allow_any_instance_of(ApplicationController).to receive(:logged_in?).and_return(true)
+		user_quote = create(:quote)
+		user.quotes << user_quote
+    	user.favorites << user_quote
+		visit home_path
+		expect(page).to have_selector(".liked-quote")
+		find(".liked-quote").click
+		expect(page).to have_selector(".unliked-quote")
+		expect(page).to_not have_selector(".liked-quote")
+	end
+
+	scenario "when not logged in, no option to favorite or unfavorite" do
+		allow_any_instance_of(ApplicationController).to receive(:logged_in?).and_return(false)
+		quote = create(:quote)
+		visit home_path
+		expect(page).to_not have_selector(".liked-quote")
+		expect(page).to_not have_selector(".unliked-quote")
+	end
+end

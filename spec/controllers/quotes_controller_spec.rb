@@ -23,4 +23,32 @@ RSpec.describe QuotesController, :type => :controller do
 			
 		end
 	end
+
+	describe "post#favorite" do
+		context "when adding quote as a favorite" do
+			let!(:user) { create(:user) }
+			let!(:quote) { create(:quote) }
+			let!(:quote_favorite) { create(:quote_favorite) }
+
+			it "saves quote to user's favorites" do
+				allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
+				post :favorite, id: quote.id				
+				expect(assigns(:is_success)).to eq(true)
+			end
+		end
+	end
+
+	describe "delete#unfavorite" do
+		context "when deleting quote from favorites" do
+			let!(:user) { create(:user) }
+			let!(:quote) { create(:quote) }
+			let!(:quote_favorite) { create(:quote_favorite) }
+			
+			it "deletes quote from user's favorites" do
+				allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(quote_favorite.user)
+				delete :unfavorite, id: quote_favorite.quote.id				
+				expect(assigns(:is_success)).to eq(true)				
+			end		
+		end
+	end
 end
