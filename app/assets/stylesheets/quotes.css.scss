@@ -45,8 +45,66 @@ div.quote-options {
 	position: absolute;
 	right: 2px;
 	bottom: 0px;
-	
+		
+	button {
+	    border: none;
+	    margin-left: 10px;
+	    margin-top: 5px;
+	    background-color: transparent;
+	    width: 15px;
+	    height: 15px;
+	    vertical-align: bottom;
+	    cursor: pointer;
+	    outline: none;
+	    opacity: 0.4;
+	}
 
+	button:hover {
+    	opacity: 0.7;
+  	}
+
+	input {
+	    border: none;
+	    margin-left: 10px;
+	    margin-top: 5px;
+	    background-color: transparent;
+	    width: 15px;
+	    height: 15px;
+	    vertical-align: bottom;
+	    cursor: pointer;
+	    outline: none;
+	    opacity: 0.4;		
+	}
+
+	input:hover {
+		opacity: 0.7;
+	}
+
+}
+
+.share-quote {
+	background: url($icon-share-quote) no-repeat center;
+    background-size: contain;
+}
+
+.show-quote {
+	background: url($icon-show-quote) no-repeat center;
+    background-size: contain;
+}
+
+.add-comment {
+	background: url($icon-comment) no-repeat center;
+    background-size: contain;
+}
+
+.like-quote {
+	background: url($icon-like-quote) no-repeat center;
+    background-size: contain;	
+}
+
+.unlike-quote {
+	background: url($icon-unlike-quote) no-repeat center;
+    background-size: contain;	
 }
 
 div.quote-options > * , .show-quote {
