@@ -1,0 +1,10 @@
+This is a quote show page
+
+<div class="quotes">
+	<%= render partial: "quotes/show_quote", locals: {quote: quote} %>
+</div>
+
+<div class='quote-comments'>
+	Comments
+	<%= render partial: "comments/index" %>
+</div>
