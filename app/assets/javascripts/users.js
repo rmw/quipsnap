@@ -134,32 +134,48 @@ var Users = {
 
   },
 
+  getQuoteHtml: function(quote, isFavorite) {
+      var html = "<div class='quote' id='" + quote.id + "'>" +
+        "<div class='content'><img src='/icons/openingquote.png'><p>" + quote.content + "</p><img src='/icons/closingquote.png'></div>" +
+          "<div class='quote-info'><a class='search-author' data-method='post'" +
+          "href='/?q%5Bauthor_name_cont%5D=" + encodeURI(quote.author_name) + "' rel='nofollow'>" + quote.author_name + "</a>"
+      if (quote.book_title != "") {
+        html = html + "<br/>" +
+          "<a class='search-title' data-method='post'" +
+          "href='/?q%5Bbook_title_cont%5D=" + encodeURI(quote.book_title) + 
+          "' rel='nofollow'>" + quote.book_title + "</a>";
+      }     
+
+      html = html + "</div><a class='search-user' data-method='post'" + 
+        "href='/?q%5Buser_goodreads_name_cont%5D="+ encodeURI(quote.user_name) + 
+        "' rel='nofollow'>Created by: " + quote.user_name + "</a>" + 
+        "<div class='quote-options'>" + 
+        "<button class='share-quote'>Share Quote</button>";
+
+      if (isFavorite) {
+        html = html + "<button class='liked-quote'></button>";
+      } else {
+        html = html + "<button class='unliked-quote'></button>";
+      }
+
+      html = html + "<button data-quote-id='" + quote.id + "' class='add-comment'>Add Comment</button></div></div>";
+
+      return html;
+  },
 
   showBookclubQuotes: function(response) {
 
     var quoteHTML = "";
 
-
     var quotes = response.quotes;
-    var title = response.title;
-    var authors = response.authors;
-    var users = response.users;
+    var favs = response.is_favorites;
 
     for (var i=0; i<quotes.length; i++) {
-      quoteHTML += "<div class='quote' id='" + quotes[i].id + "'>";
-      quoteHTML += "<div class='content'>" + quotes[i].content + "</div>";
-      if (authors[i]!=null){
-        quoteHTML += "<a class='search-author'>" + authors[i].name + "</a>";
-      }
-      if (title[i]!=null){
-        quoteHTML += "<a class='search-title'>" + title[i] + "</a>";
-      }
-      quoteHTML += "<div class='search-user'>Created by: " + users[i] + "</div>";
-      quoteHTML += "<div class='quote-options'>"
-      quoteHTML += "<button class='show-quote' href='/quotes/" + quotes[i].id + "'>Show More</button>";
-      quoteHTML += "</div></div>";
+      quoteHTML += this.getQuoteHtml(quotes[i], favs[i]);
     }
+    
     $('.quotes').html(quoteHTML);
+    makeDraggable();
   }
 };
 
@@ -171,9 +187,4 @@ $(document).ready(function(){
 
   Users.instructionsHover();
     
-
-
-
-
-  
 });
