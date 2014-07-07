@@ -10,6 +10,110 @@ var Users = {
     // this.renderList();
   },
 
+  instructionsHover: function() {
+    $('input.nav-signout').qtip({
+        content: 'Signout',
+        style: {
+                 classes: 'qtip-blue qtip-shadow qtip-rounded'
+              },
+        position: {
+                    my: 'top center',  // Position my top left...
+                    at: 'bottom center', // at the bottom right of...
+                    target: $('input.nav-signout') // my target
+              }
+        });
+    $('input.nav-bookclubs').qtip({
+        content: 'Bookclubs',
+        style: {
+                classes: 'qtip-blue qtip-shadow qtip-rounded'
+              },
+              position: {
+                    my: 'top center',  // Position my top left...
+                    at: 'bottom center', // at the bottom right of...
+                    target: this // my target
+              }
+        }).bind(this);
+    $('input.nav-favorites').qtip({
+        content: 'My Favorites',
+        style: {
+                classes: 'qtip-blue qtip-shadow qtip-rounded'
+              },
+              position: {
+                    my: 'top center',  // Position my top left...
+                    at: 'bottom center', // at the bottom right of...
+                    target: this // my target
+              }
+        }).bind(this);
+    $('input.nav-notebook').qtip({
+        content: 'My Notebook',
+        style: {
+                classes: 'qtip-blue qtip-shadow qtip-rounded'
+              },
+              position: {
+                    my: 'top center',  // Position my top left...
+                    at: 'bottom center', // at the bottom right of...
+                    target: this // my target
+              }
+        }).bind(this);
+    $('input.nav-public').qtip({
+        content: 'All Quotes',
+        style: {
+                classes: 'qtip-blue qtip-shadow qtip-rounded'
+              },
+              position: {
+                    my: 'top center',  // Position my top left...
+                    at: 'bottom center', // at the bottom right of...
+                    target: this // my target
+              }
+        }).bind(this);
+    $('button.liked-quote').qtip({
+        content: 'Unfave This!',
+        style: {
+                classes: 'qtip-blue qtip-shadow qtip-rounded'
+              },
+              position: {
+                    my: 'top center',  // Position my top left...
+                    at: 'bottom center', // at the bottom right of...
+                    target: this // my target
+              }
+        }).bind(this);
+    $('button.unliked-quote').qtip({
+        content: 'Fave This!',
+        style: {
+                classes: 'qtip-blue qtip-shadow qtip-rounded'
+              },
+              position: {
+                    my: 'top center',  // Position my top left...
+                    at: 'bottom center', // at the bottom right of...
+                    target: this // my target
+              }
+        }).bind(this);
+    $('button.share-quote').qtip({
+        content: 'Share!',
+        style: {
+                classes: 'qtip-blue qtip-shadow qtip-rounded'
+              },
+              position: {
+                    my: 'top center',  // Position my top left...
+                    at: 'bottom center', // at the bottom right of...
+                    target: this // my target
+              }
+        }).bind(this);
+    $('button.add-comment').qtip({
+        content: 'Add Comment',
+        style: {
+                classes: 'qtip-blue qtip-shadow qtip-rounded'
+              },
+              position: {
+                    my: 'top center',  // Position my top left...
+                    at: 'bottom center', // at the bottom right of...
+                    target: this // my target
+              }
+        }).bind(this);
+        
+      },
+  
+
   showQuotesForThisBookclub: function(e) {
     e.preventDefault();
     var bookclubId = e.target.id;
@@ -64,6 +168,10 @@ var Users = {
 //On document load
 $(document).ready(function(){
   Users.init();
+
+  Users.instructionsHover();
+    
+
 
 
 

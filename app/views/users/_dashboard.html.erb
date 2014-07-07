@@ -11,7 +11,7 @@
 		<div></div>
 		<nav>
 			<%= button_to current_user.goodreads_name, "/", method: :get, class: "nav-user" %>
-			<%= button_to "", "/sign_out", method: :get, class: "nav-signout" %>
+			<%= button_to "", "/sign_out", method: :get, class: "nav-signout", title: "Signout" %>
 			<%= button_to "", bookclubs_path, method: :get, class: "nav-bookclubs" %>
 			<%= button_to "", home_path, method: :get, class: "nav-notebook" %>
 			<%= button_to "", quote_search_path, method: :post, class: "nav-public" %>
@@ -21,5 +21,6 @@
 		<%= button_to "", "/sign_in", method: :get, class: "nav-signin" %>
 	<% end %>
 </div>
+
 
 
