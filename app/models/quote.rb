@@ -7,6 +7,8 @@ class Quote < ActiveRecord::Base
 	has_many :comments
 	has_many	:bookclub_quotes
 	has_many	:bookclubs, through: :bookclub_quotes
+	has_many :quote_favorites
+	has_many :favorited_users, through: :quote_favorites, source: :user
 
 	# Returns an array of nested hashes, where each element in the array represents a direct comment and its chain of replies
 	def comment_chain

@@ -10,6 +10,9 @@ class User < ActiveRecord::Base
 
   has_many :owned_clubs, class_name: "Bookclub"
 
+  has_many :quote_favorites
+  has_many :favorites, through: :quote_favorites, source: :quote
+
 	# Only allow users to use Ransack to search quotes by user's username
 	def self.ransackable_attributes(auth_obj = nil)
 		["goodreads_name"]

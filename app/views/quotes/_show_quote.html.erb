@@ -10,9 +10,14 @@
 
 	<div class='quote-options'>
 		<button class="share-quote">Share Quote</button>
-		<button class="like-quote">Favorite Quote</button>
 		<%= button_to "See more", quote_path(quote), method: :get, class: "show-quote" %>
 		<% if logged_in? %>
+			<!-- Figure out later how to do this without querying the db for each quote -->
+			<% if QuoteFavorite.find_by(user_id: current_user.id, quote_id: quote.id) %>
+				<button class="liked-quote"></button>
+			<% else %>
+				<button class="unliked-quote"></button>
+			<% end %>
 			<button data-quote-id='<%= quote.id %>' class="add-comment">Add Comment</button>
 		<% end %>
 	</div>
