@@ -73,7 +73,7 @@ var makeDraggable = function() {
 	//quote can be dropped on bookclub li and will be added to bookclub quotes
 	$("li").droppable({
 		hoverClass: "mouse-hover",
-		tolerance: 'touch',
+		tolerance: 'pointer',
 		drop:function(event,ui) {
 			var quoteId = $(ui.draggable).attr("id");
 			var bookclubId = $(this).attr("id");

@@ -3,6 +3,7 @@ var Users = {
   // Bind events to Bookclubs
   bind: function() {
     $('li').on('click', this.showQuotesForThisBookclub.bind(this));
+    $('div.quotes').on('dblclick', 'div.quote', this.goToShowQuotePage.bind(this));
   },
 
   init: function(model) {
@@ -110,6 +111,28 @@ var Users = {
                     target: this // my target
               }
         }).bind(this);
+    $('input.search').qtip({
+        content: 'Search',
+        style: {
+                classes: 'qtip-blue qtip-shadow qtip-rounded'
+              },
+              position: {
+                    my: 'top center',  // Position my top left...
+                    at: 'bottom center', // at the bottom right of...
+                    target: this // my target
+              }
+        }).bind(this);
+    $('input.clear-search').qtip({
+        content: 'Clear Search',
+        style: {
+                classes: 'qtip-blue qtip-shadow qtip-rounded'
+              },
+              position: {
+                    my: 'top center',  // Position my top left...
+                    at: 'bottom center', // at the bottom right of...
+                    target: this // my target
+              }
+        }).bind(this);
         
       },
   
@@ -176,6 +199,12 @@ var Users = {
     
     $('.quotes').html(quoteHTML);
     makeDraggable();
+  },
+
+  // redirect the user to the quote show page upon double click
+  goToShowQuotePage: function(e) {
+    var quoteId = $(e.target).closest('div.quote').attr('id');
+    window.location = "/quotes/" + quoteId;
   }
 };
 
@@ -184,7 +213,5 @@ var Users = {
 //On document load
 $(document).ready(function(){
   Users.init();
-
   Users.instructionsHover();
-    
 });

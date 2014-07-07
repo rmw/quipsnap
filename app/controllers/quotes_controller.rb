@@ -7,9 +7,20 @@ class QuotesController < ApplicationController
   	render "show", locals: {quote: @quote} 
   end
 
+  def search_by_category
+    if params[:q]
+     @search = Quote.search(params[:search_category] => params[:q][:book_title_cont])
+    else
+      @search = Quote.search(params[:q])
+    end
+    @quotes = @search.result.includes(:user).order("created_at DESC")
+    @bookclubs = logged_in? ? current_user.bookclubs : nil
+    render "users/index"
+  end
+
   # POST /
   def search
-  	@search = Quote.search(params[:q])
+    @search = Quote.search(params[:q])
   	@quotes = @search.result.includes(:user).order("created_at DESC")
   	@bookclubs = logged_in? ? current_user.bookclubs : nil
   	render "users/index"

@@ -1,14 +1,18 @@
-<!-- This uses the Ransack gem to allow for search -->
 
-<%= search_form_for @search, url: quote_search_path, html: { method: :post } do |f| %>
-  <%= f.label "Book:" %>
+
+
+<%= search_form_for @search, url: quote_search_category_path, html: { method: :post } do |f| %>
+
+	
+<select name="search_category">
+	<option value="book_title_cont">Book</option>
+	<option value="author_name_cont">Author</option>
+	<option value="user_goodreads_name_cont">User</option>
+</select>
+
+
   <%= f.search_field :book_title_cont %>
 
-  <%= f.label "Author:" %>
-  <%= f.search_field :author_name_cont %>
-
-  <%= f.label "User:" %>
-  <%= f.search_field :user_goodreads_name_cont %>
 
   <%= f.submit "", class: "search" %>
 <% end %>

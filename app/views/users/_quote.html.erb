@@ -1,13 +1,10 @@
 This is a quote show page
 
-<div class="show-quote">
+<div class="quotes">
 	<%= render partial: "quotes/show_quote", locals: {quote: quote} %>
 </div>
 
 <div class='quote-comments'>
-	<div id="comments-title">Comments</div>
-	<% if !logged_in? %>
-		<div id="not-logged-in-comments-message">Please log in to add comments</div>
-	<% end %>
+	Comments
 	<%= render partial: "comments/index" %>
 </div>
