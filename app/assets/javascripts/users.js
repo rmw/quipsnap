@@ -43,16 +43,17 @@ var Users = {
 
     for (var i=0; i<quotes.length; i++) {
       quoteHTML += "<div class='quote' id='" + quotes[i].id + "'>";
-      quoteHTML += "<div class='content'>Content: " + quotes[i].content + "</div>";
-      if (title[i]!=null){
-        quoteHTML += "<div>Title: " + title[i] + "</div>";
-      }
+      quoteHTML += "<div class='content'>" + quotes[i].content + "</div>";
       if (authors[i]!=null){
-        quoteHTML += "<div>Author: " + authors[i].name + "</div>";
+        quoteHTML += "<a class='search-author'>" + authors[i].name + "</a>";
       }
-      quoteHTML += "<div>Created by: " + users[i] + "</div>";
-      quoteHTML += "<a href='/quotes/" + quotes[i].id + "'>Show More</a>";
-      quoteHTML += "</div>";
+      if (title[i]!=null){
+        quoteHTML += "<a class='search-title'>" + title[i] + "</a>";
+      }
+      quoteHTML += "<div class='search-user'>Created by: " + users[i] + "</div>";
+      quoteHTML += "<div class='quote-options'>"
+      quoteHTML += "<button class='show-quote' href='/quotes/" + quotes[i].id + "'>Show More</button>";
+      quoteHTML += "</div></div>";
     }
     $('.quotes').html(quoteHTML);
   }
