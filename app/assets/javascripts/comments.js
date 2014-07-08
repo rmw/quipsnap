@@ -10,7 +10,7 @@ var Comment = {
 
 	commentHTML: function(commentId, content, user, isLoggedIn) {
 		var html = "<div data-comment-id='" + commentId + "' class='quote-comment'>" +
-				"<div>" + content + "</div>" +
+				"<div class='comment-content'>" + content + "</div>" +
 				"<div>Posted by: " + user + "</div>";
 
 		if (isLoggedIn) {
@@ -21,7 +21,7 @@ var Comment = {
 
 	hiddenCommentHTML: function(commentId, content, user, isLoggedIn) {
 		var html = "<div style='display:none' data-comment-id='" + commentId + "' class='quote-comment'>" +
-				"<div>" + content + "</div>" +
+				"<div class='comment-content'>" + content + "</div>" +
 				"<div>Posted by: " + user + "</div>";
 		if (isLoggedIn) {
 			html = html + "<button class='reply-comment'>Reply</button>";
@@ -31,7 +31,7 @@ var Comment = {
 
 	lastHiddenCommentHTML: function(commentId, content, user, isLoggedIn) {
 		var html = "<div style='display:none' data-comment-id='" + commentId + "' class='quote-comment'>" +
-				"<div>" + content + "</div>" +
+				"<div class='comment-content'>" + content + "</div>" +
 				"<div>Posted by: " + user + "</div>";
 		if (isLoggedIn) {
 			html = html + "<button class='reply-comment'>Reply</button>";

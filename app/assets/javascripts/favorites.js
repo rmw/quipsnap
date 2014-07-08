@@ -47,6 +47,11 @@ var userFavorites = {
 
 	getFavoriteQuotes: function(e) {
 		e.preventDefault();
+
+		// if user is on /quotes/:id or /bookclubs, redirect to /quotes/favorites
+		// else, user is on / and we can render favorite quotes via ajax
+		if window.location
+
 		var ajaxRequest = $.ajax({
 			url: "/favorites",
 			type: "get"
