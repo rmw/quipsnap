@@ -52,12 +52,12 @@
 				button {
 					font-size: $bookclub-font;
 					font-weight: 600;
-					width: 80%;
+					width: 85%;
 					margin-top: 20px;
 					padding: 0;
 					background-color: white;
 					border: none;
-					border-radius: 5px;
+					border-radius: 1px;
 					color: $book-page-font;
 				}
 			}
@@ -167,3 +167,11 @@ form#new_bookclub {
  .mouse-drop-false {
  	background-color: $bookclubs-fail-quote;
  }
+
+.ui-draggable-dragging {
+	transform:rotate(3deg);
+	-ms-transform:rotate(3deg); /* IE 9 */
+	-webkit-transform:rotate(3deg); /* Opera, Chrome, and Safari */
+	-moz-transform:rotate(3deg);
+	box-shadow: 50px 50px 10px black;
+}
