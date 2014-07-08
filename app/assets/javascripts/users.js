@@ -79,7 +79,7 @@ var Users = {
               }
         }).bind(this);
     $('button.unliked-quote').qtip({
-        content: 'Fave',
+        content: 'Fave this!',
         style: {
                 classes: 'qtip-green qtip-rounded'
               },
@@ -90,7 +90,7 @@ var Users = {
               }
         }).bind(this);
     $('button.share-quote').qtip({
-        content: 'Share!',
+        content: 'Share',
         style: {
                 classes: 'qtip-green qtip-rounded'
               },
