@@ -46,18 +46,21 @@ var userFavorites = {
 	},
 
 	getFavoriteQuotes: function(e) {
-		e.preventDefault();
 
 		// if user is on /quotes/:id or /bookclubs, redirect to /quotes/favorites
 		// else, user is on / and we can render favorite quotes via ajax
-		if window.location
+		if ((!window.location.pathname.match(/\/bookclubs/)) && (!window.location.pathname.match(/\/quotes\/\d+/))) {
+			console.log("ajax favorites");
+			e.preventDefault();
+			var ajaxRequest = $.ajax({
+				url: "/favorites",
+				type: "get"
+			});
 
-		var ajaxRequest = $.ajax({
-			url: "/favorites",
-			type: "get"
-		});
+			ajaxRequest.done(this.renderFavorites.bind(this));
 
-		ajaxRequest.done(this.renderFavorites.bind(this));
+		}
+
 	},
 
 	renderFavorites: function(response) {
