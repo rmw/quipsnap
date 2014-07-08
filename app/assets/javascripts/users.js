@@ -114,7 +114,7 @@ var Users = {
     $('input.search').qtip({
         content: 'Search',
         style: {
-                classes: 'qtip-blue qtip-shadow qtip-rounded'
+                classes: 'qtip-green qtip-shadow qtip-rounded'
               },
               position: {
                     my: 'top center',  // Position my top left...
@@ -122,10 +122,10 @@ var Users = {
                     target: this // my target
               }
         }).bind(this);
-    $('input.clear-search').qtip({
-        content: 'Clear Search',
+    $('select').qtip({
+        content: 'Category',
         style: {
-                classes: 'qtip-blue qtip-shadow qtip-rounded'
+                classes: 'qtip-green qtip-shadow qtip-rounded'
               },
               position: {
                     my: 'top center',  // Position my top left...
@@ -133,6 +133,7 @@ var Users = {
                     target: this // my target
               }
         }).bind(this);
+    
         
       },
   
