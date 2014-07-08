@@ -1,0 +1,10 @@
+<div data-comment-id='<%= comment.id %>' class='quote-comment'>
+	<div class="comment-content"><%= comment.content %></div>
+	<div>Posted by: <%= comment.user.goodreads_name %></div>
+	<% if logged_in? %>
+		<button class='reply-comment'></button>
+	<% end %>
+	<% if comment.direct_replies.length > 0 %>
+		<button class='more-comments'></button>
+	<% end %>
+</div>

@@ -1,0 +1,61 @@
+/*//// Set SASS variables here ////*/
+
+/* Colors */
+$main-background : rgba(107, 179, 130, 1.0);
+$header-background : rgba(255, 255, 255, 0.97);
+$header-bottom-border : rgba(0, 134, 60, 1.0);
+$main-font-color : black;
+$filter-link : #4f8178;
+$filter-hover : #71a2b9;
+$users-bookclubs : transparent;
+$hover-bookclubs : #71a2b9;
+$bookclubs-add-quote : #385c56;
+$bookclubs-fail-quote : #b9717e;
+$quote-info-color : rgba(3, 91, 44, 0.6);
+$logo-color : #413F3F;
+$logo-color-2: #208859;
+$comment-content-background: rgba(107, 179, 130, 0.5);
+$comment-color: rgba(3, 91, 44, 1);
+// $instructions-background : #CFFFC7;
+// $instructions-border : white;
+// $instructions-font : black;
+$instructions-font-color : #333333;
+$instructions-font-size : 11px;
+$book-color-1 : rgba(255, 106, 105, 1.0);
+$book-color-2 : rgba(226, 83, 83, 1.0);
+$book-page: white;
+$book-page-font: #4E4D4D;
+
+// Fonts
+@import url(http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic);
+@import url(http://fonts.googleapis.com/css?family=Lobster+Two:700);
+$global-font : 'Lato', sans-serif;
+$quote-border : rgba(191, 222, 191, 1.0) ;
+$quote-background : white;
+$quote-background-hover : rgba(250, 250, 250, 1.0);
+$quote-info : 13px;
+$search-user : 12px;
+$content : 17px;
+$logo-font-size : 48px;
+$logo-font-family : 'Lobster Two', cursive;
+$bookclub-font : 15px;
+$bookclub-my: 20px;
+
+/* Icons*/
+$logo : "/images/logo2.png";
+$icon-bookclubs : "/icons/glyphicons_043_group.png";
+$icon-notebook: "/icons/glyphicons_330_blog.png";
+$icon-public: "/icons/glyphicons_351_book_open.png";
+$icon-signout: "/icons/glyphicons_388_exit.png";
+$icon-search: "/icons/glyphicons_027_search.png";
+$icon-clear-search: "/icons/glyphicons_197_remove.png";
+$icon-signin: "/icons/goodreads-login-button.png";
+
+$icon-show-quote: "/icons/glyphicons_187_more.png";
+$icon-share-quote: "/icons/glyphicons_050_link.png";
+$icon-like-quote: "/icons/glyphicons_049_star.png";
+$icon-unlike-quote: "/icons/glyphicons_048_dislikes.png";
+$icon-comment: "/icons/glyphicons_309_comments.png";
+
+$icon-see-replies: "/icons/glyphicons_367_expand.png";
+$icon-hide-replies: "/icons/glyphicons_368_collapse.png";

@@ -1,0 +1,24 @@
+<div class="quote" id="<%=quote.id%>">
+	<div class="content"><img src='/icons/openingquote.png'/><p><%= quote.content %></p><img src='/icons/closingquote.png'/></div>
+		<div class="quote-info"><%= link_to quote.author.name, quote_search_path(q: {author_name_cont: quote.author.name}), method: :post, class: "search-author" %>
+	<% unless quote.book.nil? %>
+		<br/><%= link_to quote.book.title, quote_search_path(q: {book_title_cont: quote.book.title}), method: :post, class: "search-title" %>
+	<% end %>
+		</div>
+
+
+	<%= link_to "Created by: " + quote.user.goodreads_name, quote_search_path(q: {user_goodreads_name_cont: quote.user.goodreads_name}), method: :post, class: "search-user" %>
+
+	<div class='quote-options'>
+		<button class="share-quote">Share Quote</button>
+		<% if logged_in? %>
+			<!-- Figure out later how to do this without querying the db for each quote -->
+			<% if QuoteFavorite.find_by(user_id: current_user.id, quote_id: quote.id) %>
+				<button class="liked-quote"></button>
+			<% else %>
+				<button class="unliked-quote"></button>
+			<% end %>
+			<button data-quote-id='<%= quote.id %>' class="add-comment">Add Comment</button>
+		<% end %>
+	</div>
+</div>

@@ -1,57 +1,38 @@
 Rails.application.routes.draw do
-  mount JasmineRails::Engine => '/specs' if defined?(JasmineRails)
-  # The priority is based upon order of creation: first created -> highest priority.
-  # See how all your routes lay out with "rake routes".
+	mount JasmineRails::Engine => '/specs' if defined?(JasmineRails)
 
-  # You can have the root of your site routed with "root"
-  # root 'welcome#index'
+	root :to => "users#index", as: "home"
 
-  # Example of regular route:
-  #   get 'products/:id' => 'catalog#view'
+	get '/sign_in' => "logging#sign_in"
+	get '/sign_out' => "logging#sign_out"
+	get '/auth' => "logging#auth" 
 
-  # Example of named route that can be invoked with purchase_url(id: product.id)
-  #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
+	get '/quotes/:id' => "quotes#show", as: "quote"
+	post '/' => "quotes#search", as: "quote_search"
+	post '/category' => "quotes#search_by_category", as: "quote_search_category"
 
-  # Example resource route (maps HTTP verbs to controller actions automatically):
-  #   resources :products
+	get '/favorites' => "quotes#favorites", as: "favorites"
+	post '/quotes/:id/favorite' => "quotes#favorite"
+	delete '/quotes/:id/unfavorite' => "quotes#unfavorite"
 
-  # Example resource route with options:
-  #   resources :products do
-  #     member do
-  #       get 'short'
-  #       post 'toggle'
-  #     end
-  #
-  #     collection do
-  #       get 'sold'
-  #     end
-  #   end
+	post '/quotes/comments/:comment_id/create' => "comments#create", as: "new_comment_reply"
+	post '/quotes/:quote_id/comments/create' => "comments#create", as: "new_comment"
+	get '/comments/replies' => "comments#get_replies"
 
-  # Example resource route with sub-resources:
-  #   resources :products do
-  #     resources :comments, :sales
-  #     resource :seller
-  #   end
+	get '/bookclubs' => "bookclubs#index"
+	post '/bookclubs/create' => "bookclubs#create"
 
-  # Example resource route with more complex sub-resources:
-  #   resources :products do
-  #     resources :comments
-  #     resources :sales do
-  #       get 'recent', on: :collection
-  #     end
-  #   end
+	post '/bookclubs/:bookclub_id/quotes/:quote_id' => 'bookclubs#add_quote'
 
-  # Example resource route with concerns:
-  #   concern :toggleable do
-  #     post 'toggle'
-  #   end
-  #   resources :posts, concerns: :toggleable
-  #   resources :photos, concerns: :toggleable
+	get '/bookclubs/all' => "bookclubs#all"
+	post '/bookclubs' => "bookclubs#create"
 
-  # Example resource route within a namespace:
-  #   namespace :admin do
-  #     # Directs /admin/products/* to Admin::ProductsController
-  #     # (app/controllers/admin/products_controller.rb)
-  #     resources :products
-  #   end
+	get '/bookclubs/all' => "bookclubs#all"
+	post '/bookclubs' => "bookclubs#create"
+	get '/bookclubs/:bookclub_id' => 'bookclubs#show', as: "show_bookclub"
+
+
+	put '/bookclubs/join' => "bookclubs#join"
+
+
 end

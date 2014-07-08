@@ -1,0 +1,159 @@
+@import "style_guide";
+
+.users-bookclubs {
+	width: 20%;
+	float: right;
+	background-color: $users-bookclubs;	
+
+	p {
+		margin-bottom: 5px;
+		margin-top: 5px;
+		padding-bottom: 5px;
+		text-align: center;
+		border-bottom: 3px solid $main-background;
+		color: white;
+		font-weight: 800;
+		font-size: $bookclub-my;
+	}
+
+	ul {
+		text-align: center;
+		list-style-type: none;
+		padding: 0;
+		border-radius: 10px;
+		margin: 0px;
+
+
+		li {
+			height: 100px;
+			margin-bottom: 4px;
+
+			/* BOOKCLUBS BAR */
+
+			div.cover-top {
+				border-radius: 5px 0 0 5px;
+				border-left: 3px solid $book-color-2;
+			  height: 20px;
+			  width: 100%;
+			  background-color: $book-color-1;
+			}
+
+			div.cover-bottom {
+				border-radius: 5px 0 0 5px;
+				border-left: 3px solid $book-color-2;
+				border-bottom: 2px solid $book-color-2; 
+				height: 20px;
+				width: 100%;
+			  background-color: $book-color-1;
+			}
+
+			div.book-pages {
+				border: 1px solid white;
+				height: 60px;
+				background-color: $book-page;
+				width: 95%;
+				margin-left: 5%;
+				background-image: url('/images/page-line.png');
+				button {
+					font-size: $bookclub-font;
+					font-weight: 600;
+					width: 85%;
+					margin-top: 20px;
+					padding: 0;
+					background-color: white;
+					border: none;
+					border-radius: 1px;
+					color: $book-page-font;
+				}
+			}
+		}
+	}
+}
+
+
+
+div.bookclubs-all {
+
+	width: 35%;
+	float: left;
+	background-color: $quote-background;
+
+	ul {
+		text-align: center;
+		list-style-type: none;
+		padding: 0;
+		border-radius: 10px;
+		margin: 0px;
+
+		li {
+			padding: 1em 0;
+			height: 30px;
+			border-bottom: 3px solid $main-background;
+
+			button {
+				border: none;
+				background-color: transparent;
+				padding: 0;
+				margin: 0;
+				width: 100%;
+				height: 100%;
+				cursor: pointer;
+				
+				font-size: 14px;
+			}
+
+			button.bookclub-join {
+				float: right;
+				border: solid 2px black;
+			}
+		}
+	}
+}
+
+form#new_bookclub {
+	float:left;
+	margin-left: 3px;
+	width:45%;
+	background-color: transparent;
+	height: 250px;
+	padding: 8px;
+
+	label {
+		display: block;
+		color: white;
+		
+		font-size: 18px;
+	}
+
+	#submit {
+		background-color: white;
+		width: 400px;
+		margin-top: 10px;
+		
+		font-size: 18px;
+	}
+
+	input#bookclub_name {
+
+		height: 22px;
+		width: 400px;
+		border-radius: 6px;
+		margin-bottom: 10px;
+		
+
+	}
+
+	input#bookclub_description {
+
+		height: 66px;
+		width: 400px;
+		border-radius: 6px;
+		
+	}
+
+
+}
+
+
+
+

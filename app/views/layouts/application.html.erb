@@ -1,14 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Quipsnap</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <title>Quotemunk</title>
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
+  <%= csrf_meta_tag %>
+  <%= javascript_tag "var AUTH_TOKEN = '#{form_authenticity_token}';" if protect_against_forgery? %>
 </head>
 <body>
+<header>
+    <%= render partial: "users/dashboard" %>
+</header>
 
-<%= yield %>
+<div class="container">
+  <%= yield %>
+</div>
 
 </body>
 </html>

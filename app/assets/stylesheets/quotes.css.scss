@@ -1,0 +1,218 @@
+@import "style_guide";
+
+/* QUOTES */
+
+div.show-quote {
+  width: 40%;
+  margin: 0 30%;
+ }
+
+
+div.quote {
+  border-radius: 5px;
+  margin: 0.8em 0 0 0;
+  background-color: $quote-background;
+  position: relative;
+  padding: 0.3em;
+  cursor: pointer;
+
+  div.quote-options {
+
+  	button {
+  		opacity: 0.1;
+  	}
+
+  	.liked-quote {
+  		opacity: 0.7;
+  	}
+
+	}
+}
+
+div.quote:hover {
+	background-color: $quote-background-hover;
+
+	div.quote-options {
+
+		button {
+			opacity: 0.3;
+		}
+
+		button:hover {
+			opacity: 0.7;
+		}
+
+		.liked-quote {
+  		opacity: 0.7;
+  	}
+
+	}
+
+}
+
+
+div.quote a {
+	text-decoration: none;
+	color: $filter-link;
+}
+
+.content {
+	font-size: $content;
+	display: block;
+	max-width: 99%;
+	margin: 0 auto;
+	opacity: 0.8;
+	text-align: center;
+
+	img {
+		opacity: 0.4;
+		display: inline-block;
+		max-width: 3%;
+		vertical-align: top;
+		padding: 1em 1em 0 1em;
+	}
+
+	p {
+		display: inline-block;
+		margin-bottom: 0;
+		max-width: 80%
+	}
+}
+
+div.quote-info {
+	display: block;
+	width: 90%;
+	text-align: center;
+	margin: 0.5em auto 0 auto;
+	color: $quote-info-color;
+
+	a.search-author	{
+		display: inline-block;
+		font-size: $quote-info;
+		border-radius: 5px;
+		padding: 3px;
+	}
+
+	a.search-author:hover {
+		background-color: $quote-info-color;
+		color: white;
+	}
+
+	a.search-title {
+		display: inline-block;
+		font-style:italic;
+		font-size: $quote-info;
+		border-radius: 5px;
+		padding: 3px;
+	}
+
+	a.search-title:hover {
+		background-color: $quote-info-color;
+		color: white;
+	}
+
+}
+
+.search-user {
+	display: inline-block;
+	font-size: $search-user;
+	border-radius: 5px;
+	padding: 2px;
+}
+
+.search-user:hover {
+	color: white;
+	background-color: $quote-info-color;
+}
+
+div.quote-options {
+	position: absolute;
+	right: 0.6em;
+	bottom: 0.35em;
+		
+	button {
+	    border: none;
+	    margin-left: 10px;
+	    margin-top: 5px;
+	    background-color: transparent;
+	    width: 20px;
+	    height: 18px;
+	    vertical-align: bottom;
+	    cursor: pointer;
+	    outline: none;
+	}
+
+	.share-quote {
+		background: url($icon-share-quote) no-repeat center;
+	  background-size: contain;
+	}
+
+	.show-quote {
+		background: url($icon-show-quote) no-repeat center;
+	  background-size: contain;
+	}
+
+	.add-comment {
+		background: url($icon-comment) no-repeat center;
+	  background-size: contain;
+	}
+
+	.liked-quote {
+		background: url($icon-like-quote) no-repeat center;
+	  background-size: contain;
+	}
+
+	.unliked-quote {
+		background: url($icon-unlike-quote) no-repeat center;
+	  background-size: contain;	
+	}
+
+	input {
+	    border: none;
+	    margin-left: 10px;
+	    margin-top: 5px;
+	    background-color: transparent;
+	    width: 15px;
+	    height: 15px;
+	    vertical-align: bottom;
+	    cursor: pointer;
+	    outline: none;
+	    opacity: 0.4;		
+	}
+
+	input:hover {
+		opacity: 0.7;
+	}
+
+}
+
+div.quote-options > * , .show-quote {
+	display: inline-block;
+	border: none;  /* If your icon IS the button */
+	color: transparent;  /* If you don't want the button text to show up */
+}
+
+.ui-droppable {
+ 	// background-color: $users-bookclubs;
+ 	// padding: 0;
+ }
+ .mouse-hover {
+ 	// background-color: $hover-bookclubs;
+ }
+
+ .mouse-drop-true {
+ 	// background-color: $bookclubs-add-quote;
+ }
+
+ .mouse-drop-false {
+ 	// background-color: $bookclubs-fail-quote;
+ }
+
+.ui-draggable-dragging {
+	transform:rotate(3deg);
+	-ms-transform:rotate(3deg); /* IE 9 */
+	-webkit-transform:rotate(3deg); /* Opera, Chrome, and Safari */
+	-moz-transform:rotate(3deg);
+	box-shadow: 3px 3px 1px #438E28;
+	opacity: 0.8;
+}
