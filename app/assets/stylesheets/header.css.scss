@@ -140,6 +140,20 @@ select {
   }
 }
 
+.username {
+  position: absolute;
+  top: 2px;
+  right: 235px;
+  width: 280px;
+
+  p {
+    margin: 0px;
+    padding: 0px;
+    text-align: right;
+  }
+
+}
+
 .nav-bookclubs {
   background: url($icon-bookclubs) no-repeat center;
 }
@@ -154,6 +168,12 @@ select {
 
 .nav-signout {
   background: url($icon-signout) no-repeat center; 
+
+}
+
+input.nav-signout {
+  border-left: 2px solid black;
+  margin-left: 20px;
 }
 
 .nav-favorites {
