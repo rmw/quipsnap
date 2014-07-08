@@ -60,7 +60,7 @@ div.quote a {
 .content {
 	font-size: $content;
 	display: block;
-	width: 99%;
+	max-width: 99%;
 	margin: 0 auto;
 	opacity: 0.8;
 	text-align: center;
@@ -76,6 +76,7 @@ div.quote a {
 	p {
 		display: inline-block;
 		margin-bottom: 0;
+		max-width: 80%
 	}
 }
 
